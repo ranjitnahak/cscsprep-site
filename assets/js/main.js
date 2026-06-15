@@ -241,6 +241,29 @@ async function initQOTDTeaser() {
   }
 }
 
+function initFAQ() {
+  const accordion = document.querySelector('.faq-accordion');
+  if (!accordion) return;
+
+  accordion.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.faq-question');
+    if (!trigger) return;
+
+    const item = trigger.closest('.faq-item');
+    const wasOpen = item.classList.contains('is-open');
+
+    accordion.querySelectorAll('.faq-item.is-open').forEach((openItem) => {
+      openItem.classList.remove('is-open');
+      openItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+    });
+
+    if (!wasOpen) {
+      item.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-placeholder')?.insertAdjacentHTML('beforeend', NAV_HTML);
   document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', FOOTER_HTML);
@@ -248,4 +271,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCohortBar();
   initStatsCounter();
   initQOTDTeaser();
+  initFAQ();
 });
