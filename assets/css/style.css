@@ -340,6 +340,142 @@ h1 {
   width: 100%;
 }
 
+/* ── Enrol page ── */
+
+.page-content.enrol-page {
+  display: block;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.enrol-hero .hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+}
+
+.enrol-hero .hero-content {
+  max-width: none;
+  text-align: center;
+}
+
+.enrol-hero .hero-cta-row {
+  justify-content: center;
+}
+
+.enrol-details {
+  background: var(--dark2);
+  padding: 60px 40px 80px;
+}
+
+.enrol-details-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.enrol-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 0 0 48px;
+  padding: 0;
+}
+
+.enrol-fact {
+  margin: 0;
+}
+
+.enrol-fact dt {
+  margin: 0 0 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--orange);
+}
+
+.enrol-fact dd {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--white);
+}
+
+.enrol-includes-heading {
+  margin: 0 0 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--white);
+}
+
+.enrol-includes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.enrol-includes li {
+  position: relative;
+  padding: 12px 0 12px 28px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 17px;
+  color: var(--light-grey);
+  border-bottom: 1px solid var(--dark3);
+}
+
+.enrol-includes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+}
+
+.enrol-includes li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 767px) {
+  .enrol-hero .hero-inner {
+    padding: 60px 24px 40px;
+  }
+
+  .enrol-details {
+    padding: 48px 24px 60px;
+  }
+
+  .enrol-facts {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .enrol-fact dd {
+    font-size: 24px;
+  }
+
+  .enrol-includes-heading {
+    font-size: 26px;
+  }
+
+  .enrol-hero .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .enrol-hero .hero-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* §1 Cohort bar */
 
 .cohort-bar {

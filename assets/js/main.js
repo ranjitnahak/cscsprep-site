@@ -1,13 +1,34 @@
 // CSCS Prep — main.js
 
-const COHORT_DATE = new Date('2026-07-11T00:00:00+05:30');
+function getCohortDate() {
+  return new Date(CSCS_CONFIG.cohortDate);
+}
+
+function formatCohortDateShort() {
+  return getCohortDate().toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'Asia/Kolkata',
+  });
+}
+
+function formatCohortDateFull() {
+  return getCohortDate().toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'Asia/Kolkata',
+  });
+}
 
 function getDaysLeft(date) {
   const days = Math.ceil((date - new Date()) / 86400000);
   return Math.max(0, days);
 }
 
-const NAV_HTML = `
+function getNavHtml() {
+  const { enrolLink } = CSCS_CONFIG;
+  return `
 <div class="nav-top-bar"></div>
 <header class="nav-bar">
   <div class="nav-inner">
@@ -19,7 +40,7 @@ const NAV_HTML = `
       <a href="#">About</a>
       <a href="#">Free Resources</a>
     </nav>
-    <a href="#" class="nav-cta">ENROL NOW →</a>
+    <a href="${enrolLink}" class="nav-cta">ENROL NOW →</a>
     <button class="nav-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-overlay">☰</button>
   </div>
 </header>
@@ -31,12 +52,15 @@ const NAV_HTML = `
     <a href="#">Products</a>
     <a href="#">About</a>
     <a href="#">Free Resources</a>
-    <a href="#" class="nav-cta">ENROL NOW →</a>
+    <a href="${enrolLink}" class="nav-cta">ENROL NOW →</a>
   </nav>
 </div>
 `;
+}
 
-const FOOTER_HTML = `
+function getFooterHtml() {
+  const { instagramUrl, whatsappLink, calLink, privacyUrl, termsUrl } = CSCS_CONFIG;
+  return `
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -67,32 +91,80 @@ const FOOTER_HTML = `
         <ul>
           <li><a href="#">About Ranjit</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
+          <li><a href="${privacyUrl}">Privacy Policy</a></li>
+          <li><a href="${termsUrl}">Terms of Use</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
         <ul>
-          <li><a href="#">Instagram @cscsprep</a></li>
-          <li><a href="#">Free WhatsApp Group</a></li>
-          <li><a href="#">Book a Clarity Call</a></li>
+          <li><a href="${instagramUrl}">Instagram @cscsprep</a></li>
+          <li><a href="${whatsappLink}">Free WhatsApp Group</a></li>
+          <li><a href="${calLink}">Book a Clarity Call</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 CSCS Prep · Ranjit Nahak, MSc, CSCS · sportsscienceuniversity.com</span>
       <div class="footer-bottom-right">
-        <a href="#">@cscsprep</a>
+        <a href="${instagramUrl}">@cscsprep</a>
         <span class="sep">·</span>
-        <a href="#">Privacy Policy</a>
+        <a href="${privacyUrl}">Privacy Policy</a>
         <span class="sep">·</span>
-        <a href="#">Terms of Use</a>
+        <a href="${termsUrl}">Terms of Use</a>
       </div>
     </div>
   </div>
 </footer>
 `;
+}
+
+function applyCscsConfig() {
+  const { cohortLabel } = CSCS_CONFIG;
+  const labelUpper = cohortLabel.toUpperCase();
+
+  document.querySelectorAll('[data-cscs-href]').forEach((el) => {
+    const key = el.dataset.cscsHref;
+    if (CSCS_CONFIG[key]) {
+      el.href = CSCS_CONFIG[key];
+    }
+  });
+
+  const cohortDateLabel = document.getElementById('cohort-date-label');
+  if (cohortDateLabel) {
+    cohortDateLabel.textContent = formatCohortDateShort();
+  }
+
+  const heroEnrolBtn = document.getElementById('hero-enrol-btn');
+  if (heroEnrolBtn) {
+    heroEnrolBtn.textContent = `ENROL IN THE ${labelUpper} →`;
+  }
+
+  const finalCtaPre = document.getElementById('final-cta-pre');
+  if (finalCtaPre) {
+    finalCtaPre.textContent = `LIMITED SEATS · ${labelUpper}`;
+  }
+
+  const finalCtaHeading = document.getElementById('final-cta-heading');
+  if (finalCtaHeading) {
+    finalCtaHeading.textContent = `The ${cohortLabel} is filling up.`;
+  }
+}
+
+function initEnrolPage() {
+  const page = document.querySelector('.enrol-page');
+  if (!page) return;
+
+  const cohortLabel = document.getElementById('enrol-cohort-label');
+  if (cohortLabel) {
+    cohortLabel.textContent = CSCS_CONFIG.cohortLabel;
+  }
+
+  const startDate = document.getElementById('enrol-start-date');
+  if (startDate) {
+    startDate.textContent = formatCohortDateFull();
+  }
+}
 
 function initMobileNav() {
   const hamburger = document.querySelector('.nav-hamburger');
@@ -135,7 +207,7 @@ function initCohortBar() {
     return;
   }
 
-  const days = getDaysLeft(COHORT_DATE);
+  const days = getDaysLeft(getCohortDate());
 
   if (days === 0) {
     bar.classList.add('is-hidden');
@@ -251,7 +323,7 @@ function initFinalCta() {
   const section = document.getElementById('final-cta');
   if (!section) return;
 
-  const days = getDaysLeft(COHORT_DATE);
+  const days = getDaysLeft(getCohortDate());
   const subEl = document.getElementById('final-cta-sub');
   const daysEl = document.getElementById('final-cta-days');
 
@@ -287,11 +359,13 @@ function initFAQ() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('nav-placeholder')?.insertAdjacentHTML('beforeend', NAV_HTML);
-  document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', FOOTER_HTML);
+  applyCscsConfig();
+  document.getElementById('nav-placeholder')?.insertAdjacentHTML('beforeend', getNavHtml());
+  document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', getFooterHtml());
   initMobileNav();
   initCohortBar();
   initFinalCta();
+  initEnrolPage();
   initStatsCounter();
   initQOTDTeaser();
   initFAQ();

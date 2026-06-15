@@ -22,8 +22,8 @@
     <div class="cohort-bar" id="cohort-bar">
       <div class="cohort-bar-inner">
         <p class="cohort-bar-text">
-          🔥 Next cohort starts July 11 — <span id="cohort-days">0</span> days away. Seats are limited.
-          <a href="#" class="cohort-bar-link">Reserve yours →</a>
+          🔥 Next cohort starts <span id="cohort-date-label"></span> — <span id="cohort-days">0</span> days away. Seats are limited.
+          <a href="#" class="cohort-bar-link" data-cscs-href="enrolLink">Reserve yours →</a>
         </p>
         <button class="cohort-bar-dismiss" type="button" aria-label="Dismiss announcement">✕</button>
       </div>
@@ -39,9 +39,9 @@
           </h1>
           <p class="hero-sub">Structured coaching, 1,400+ practice questions, and a coach who has been through every page of the NSCA textbook — so you don't have to wing it.</p>
           <div class="hero-cta-row">
-            <a href="#" class="hero-btn hero-btn-primary">ENROL IN THE JULY 11 COHORT →</a>
-            <a href="https://cal.com/cscs-prep/cscs-clarity-call" class="hero-btn hero-btn-secondary" target="_blank" rel="noopener noreferrer">BOOK A FREE CALL WITH RANJIT →</a>
-            <a href="#" class="hero-link">Join the Free WhatsApp Group <span class="hero-link-arrow">→</span></a>
+            <a href="#" id="hero-enrol-btn" class="hero-btn hero-btn-primary" data-cscs-href="enrolLink">ENROL NOW →</a>
+            <a href="#" class="hero-btn hero-btn-secondary" data-cscs-href="calLink" target="_blank" rel="noopener noreferrer">BOOK A FREE CALL WITH RANJIT →</a>
+            <a href="#" class="hero-link" data-cscs-href="whatsappLink">Join the Free WhatsApp Group <span class="hero-link-arrow">→</span></a>
           </div>
         </div>
         <div class="hero-photo" aria-hidden="true">Coach photo</div>
@@ -186,7 +186,7 @@
             <span class="faq-label">FAQ</span>
             <h2 class="faq-heading">Questions we get all the time.</h2>
             <p class="faq-sub">If yours isn't here, book a free call.</p>
-            <a href="https://cal.com/cscs-prep/cscs-clarity-call" class="faq-cta" target="_blank" rel="noopener noreferrer">Book a call →</a>
+            <a href="#" class="faq-cta" data-cscs-href="calLink" target="_blank" rel="noopener noreferrer">Book a call →</a>
           </div>
           <div class="faq-accordion" aria-label="Frequently asked questions">
             <div class="faq-item">
@@ -324,17 +324,18 @@
     </section>
 
     <section class="final-cta" id="final-cta">
-      <p class="final-cta-pre">LIMITED SEATS · JULY 11 COHORT</p>
-      <h2 class="final-cta-heading">The July 11 Cohort is filling up.</h2>
+      <p class="final-cta-pre" id="final-cta-pre"></p>
+      <h2 class="final-cta-heading" id="final-cta-heading"></h2>
       <p class="final-cta-sub" id="final-cta-sub"><span id="final-cta-days">0</span> days left to enrol.</p>
       <div class="final-cta-buttons">
-        <a href="#" class="final-cta-btn final-cta-btn-primary final-cta-btn-enrol">ENROL NOW →</a>
-        <a href="#" class="final-cta-btn final-cta-btn-primary final-cta-btn-waitlist">JOIN THE WAITLIST →</a>
-        <a href="https://cal.com/cscs-prep/cscs-clarity-call" class="final-cta-btn final-cta-btn-secondary" target="_blank" rel="noopener noreferrer">BOOK A FREE CALL →</a>
+        <a href="#" class="final-cta-btn final-cta-btn-primary final-cta-btn-enrol" data-cscs-href="enrolLink">ENROL NOW →</a>
+        <a href="#" class="final-cta-btn final-cta-btn-primary final-cta-btn-waitlist" data-cscs-href="enrolLink">JOIN THE WAITLIST →</a>
+        <a href="#" class="final-cta-btn final-cta-btn-secondary" data-cscs-href="calLink" target="_blank" rel="noopener noreferrer">BOOK A FREE CALL →</a>
       </div>
     </section>
   </main>
   <div id="footer-placeholder"></div>
+  <script src="assets/js/config.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

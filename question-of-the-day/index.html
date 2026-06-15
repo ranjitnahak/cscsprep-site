@@ -498,6 +498,7 @@
 
   <footer class="qotd-footer">© 2026 CSCS Prep · cscsprep.in &nbsp;|&nbsp; @cscsprep</footer>
 
+  <script src="../assets/js/config.js"></script>
   <script>
     let qotdData = null;
 
@@ -507,15 +508,15 @@
     const CTA_POOL = [
       {
         text: 'Join 100+ CSCS candidates in the free WhatsApp group',
-        href: '#whatsapp-placeholder',
+        href: CSCS_CONFIG.whatsappLink,
       },
       {
         text: 'Book a free 20-min clarity call with Ranjit',
-        href: 'https://cal.com/cscs-prep/cscs-clarity-call',
+        href: CSCS_CONFIG.calLink,
       },
       {
-        text: 'Enrol in the July 11 Cohort — limited seats remaining',
-        href: '#enrol-placeholder',
+        text: `Enrol in the ${CSCS_CONFIG.cohortLabel} — limited seats remaining`,
+        href: CSCS_CONFIG.enrolLink,
       },
     ];
 
