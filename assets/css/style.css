@@ -1013,66 +1013,59 @@ h1 {
   align-items: center;
 }
 
-.meet-coach-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.meet-coach-slideshow {
+  position: relative;
+  overflow: hidden;
 }
 
-.meet-coach-photo {
-  margin: 0;
-}
-
-.meet-coach-photo--1 {
-  grid-column: 1;
-  grid-row: 1 / -1;
-}
-
-.meet-coach-photo--2 {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.meet-coach-photo-row {
-  grid-column: 2;
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.meet-coach-photo-placeholder {
-  width: 100%;
-  background: var(--dark2);
+.meet-coach-slideshow-slides {
+  position: relative;
+  aspect-ratio: 4 / 3;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Barlow', sans-serif;
-  font-weight: 400;
-  color: var(--grey);
 }
 
-.meet-coach-photo--1 .meet-coach-photo-placeholder {
-  aspect-ratio: 3 / 4;
+.meet-coach-slideshow-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
-.meet-coach-photo--2 .meet-coach-photo-placeholder {
-  aspect-ratio: 16 / 9;
+.meet-coach-slideshow-slides img.is-active {
+  opacity: 1;
 }
 
-.meet-coach-photo--3 .meet-coach-photo-placeholder,
-.meet-coach-photo--4 .meet-coach-photo-placeholder {
-  aspect-ratio: 1 / 1;
-}
-
-.meet-coach-photo-caption {
-  margin-top: 8px;
+.meet-coach-slideshow-caption {
+  margin: 8px 0 0;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
   font-size: 12px;
   color: var(--grey);
   text-transform: uppercase;
+}
+
+.meet-coach-slideshow-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.meet-coach-slideshow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dark3);
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.meet-coach-slideshow-dot.is-active {
+  background: var(--orange);
 }
 
 .meet-coach-name {
@@ -1141,15 +1134,11 @@ h1 {
 }
 
 .meet-coach-ticker-item {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--grey);
-  white-space: nowrap;
-}
-
-.meet-coach-ticker-item:hover {
-  color: var(--white);
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
 }
 
 @keyframes meet-coach-scroll {
@@ -1182,19 +1171,8 @@ h1 {
     gap: 40px;
   }
 
-  .meet-coach-photos {
-    grid-template-columns: 1fr;
-  }
-
-  .meet-coach-photo--1,
-  .meet-coach-photo--2,
-  .meet-coach-photo-row {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .meet-coach-photo-row {
-    grid-template-columns: 1fr;
+  .meet-coach-slideshow {
+    width: 100%;
   }
 }
 
