@@ -1274,3 +1274,101 @@ h1 {
     flex: 1 1 100%;
   }
 }
+
+/* § Final CTA */
+
+.final-cta {
+  background: var(--orange);
+  padding: 80px 40px;
+  text-align: center;
+  color: var(--white);
+}
+
+.final-cta-pre {
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0.85;
+  color: var(--white);
+}
+
+.final-cta-heading {
+  margin: 16px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 1.05;
+  color: var(--white);
+}
+
+.final-cta-sub {
+  margin: 16px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  opacity: 0.9;
+  color: var(--white);
+}
+
+.final-cta-buttons {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.final-cta-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 14px 32px;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.final-cta-btn-primary {
+  background: var(--white);
+  color: var(--orange);
+}
+
+.final-cta-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.final-cta-btn-secondary {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.final-cta-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.final-cta-btn-waitlist {
+  display: none;
+}
+
+.final-cta.is-waitlist .final-cta-btn-enrol {
+  display: none;
+}
+
+.final-cta.is-waitlist .final-cta-btn-waitlist {
+  display: inline-block;
+}
+
+@media (max-width: 767px) {
+  .final-cta {
+    padding: 60px 24px;
+  }
+
+  .final-cta-heading {
+    font-size: 36px;
+  }
+}

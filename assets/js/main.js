@@ -1,5 +1,12 @@
 // CSCS Prep — main.js
 
+const COHORT_DATE = new Date('2026-07-11T00:00:00+05:30');
+
+function getDaysLeft(date) {
+  const days = Math.ceil((date - new Date()) / 86400000);
+  return Math.max(0, days);
+}
+
 const NAV_HTML = `
 <div class="nav-top-bar"></div>
 <header class="nav-bar">
@@ -128,10 +135,9 @@ function initCohortBar() {
     return;
   }
 
-  const target = new Date('2026-07-11T00:00:00+05:30');
-  const days = Math.ceil((target - new Date()) / 86400000);
+  const days = getDaysLeft(COHORT_DATE);
 
-  if (days <= 0) {
+  if (days === 0) {
     bar.classList.add('is-hidden');
     return;
   }
@@ -241,6 +247,22 @@ async function initQOTDTeaser() {
   }
 }
 
+function initFinalCta() {
+  const section = document.getElementById('final-cta');
+  if (!section) return;
+
+  const days = getDaysLeft(COHORT_DATE);
+  const subEl = document.getElementById('final-cta-sub');
+  const daysEl = document.getElementById('final-cta-days');
+
+  if (days === 0) {
+    section.classList.add('is-waitlist');
+    if (subEl) subEl.textContent = 'Applications open for the next cohort. Join the waitlist.';
+  } else if (daysEl) {
+    daysEl.textContent = days;
+  }
+}
+
 function initFAQ() {
   const accordion = document.querySelector('.faq-accordion');
   if (!accordion) return;
@@ -269,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', FOOTER_HTML);
   initMobileNav();
   initCohortBar();
+  initFinalCta();
   initStatsCounter();
   initQOTDTeaser();
   initFAQ();
