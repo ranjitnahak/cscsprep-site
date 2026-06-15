@@ -105,7 +105,7 @@ function getFooterHtml() {
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 CSCS Prep · Ranjit Nahak, MSc, CSCS · sportsscienceuniversity.com</span>
+      <span>© 2026 CSCS Prep · Ranjit Nahak, MSc, CSCS</span>
       <div class="footer-bottom-right">
         <a href="${instagramUrl}">@cscsprep</a>
         <span class="sep">·</span>
@@ -343,7 +343,7 @@ function initCoachSlideshow() {
 
   const slides = [
     { src: '/assets/images/coach/coach-1.jpg', caption: 'S&C Coach, Pretoria Capitals — SA T20 League' },
-    { src: '/assets/images/coach/coach-2.jpg', caption: 'Haryana Steelers, Pro Kabaddi League Season 10', objectPosition: 'center top' },
+    { src: '/assets/images/coach/coach-2.jpg', caption: 'Haryana Steelers, Pro Kabaddi League Season 10', objectPosition: 'center 12%' },
     { src: '/assets/images/coach/coach-3.jpg', caption: 'Soorma Hockey Club — Hockey India League', objectPosition: 'center top' },
     { src: '/assets/images/coach/coach-4.jpg', caption: 'TEDx Speaker' },
     { src: '/assets/images/coach/coach-5.jpg', caption: 'Presenting at NSCA India — GPS Data Analysis' },
