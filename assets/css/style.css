@@ -1,0 +1,6 @@
+:root {
+  --orange: #F4511E; --amber: #FFB347; --blue: #66AAFF;
+  --dark: #0F0F0F; --dark2: #1A1A1A; --dark3: #242424;
+  --white: #FFFFFF; --grey: #AAAAAA; --light-grey: #CCCCCC;
+}
+body { margin: 0; background: var(--dark); color: var(--white); }
