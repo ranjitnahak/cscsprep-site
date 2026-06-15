@@ -190,8 +190,15 @@ h1 {
     display: none;
   }
 
+  .nav-inner {
+    justify-content: center;
+    position: relative;
+  }
+
   .nav-hamburger {
     display: block;
+    position: absolute;
+    right: 24px;
   }
 }
 
@@ -308,13 +315,19 @@ h1 {
 
 @media (max-width: 767px) {
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 28px;
   }
 
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -386,6 +399,23 @@ h1 {
 
 .cohort-bar-dismiss:hover {
   color: var(--white);
+}
+
+@media (max-width: 767px) {
+  .cohort-bar {
+    height: auto;
+    min-height: 44px;
+  }
+
+  .cohort-bar-inner {
+    height: auto;
+    padding: 10px 48px 10px 16px;
+  }
+
+  .cohort-bar-text {
+    font-size: 13px;
+    line-height: 1.4;
+  }
 }
 
 /* §2 Hero */
@@ -538,8 +568,17 @@ h1 {
     font-size: 36px;
   }
 
+  .hero-sub {
+    font-size: 15px;
+  }
+
   .hero-photo {
     display: none;
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .hero-btn {
@@ -598,6 +637,10 @@ h1 {
 
   .stat-item + .stat-item {
     border-left: none;
+  }
+
+  .stat-number {
+    font-size: 48px;
   }
 }
 
@@ -1015,7 +1058,108 @@ h1 {
   }
 
   .meet-coach-photo-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* § Pass Wall */
+
+.pass-wall {
+  padding: 100px 40px;
+  background: var(--dark2);
+}
+
+.pass-wall-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pass-wall-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.pass-wall-heading {
+  margin: 12px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.pass-wall-sub {
+  margin: 16px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--grey);
+  line-height: 1.5;
+}
+
+.pass-wall-cards {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pass-wall-card {
+  background: var(--dark);
+  border-left: 3px solid var(--orange);
+  border-radius: 4px;
+  padding: 28px 24px;
+  box-sizing: border-box;
+}
+
+.pass-wall-quote {
+  margin: 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--light-grey);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.pass-wall-name {
+  margin: 20px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+}
+
+.pass-wall-credential {
+  margin: 4px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--grey);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1023px) {
+  .pass-wall-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .pass-wall {
+    padding: 80px 24px;
+  }
+
+  .pass-wall-heading {
+    font-size: 36px;
+  }
+
+  .pass-wall-cards {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1275,6 +1419,129 @@ h1 {
   }
 }
 
+/* § Blog teaser */
+
+.blog-teaser {
+  padding: 100px 40px;
+  background: var(--dark2);
+}
+
+.blog-teaser-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-teaser-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.blog-teaser-heading {
+  margin: 12px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.blog-cards {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.blog-card {
+  background: var(--dark);
+  border-left: 3px solid var(--orange);
+  border-radius: 4px;
+  padding: 28px 24px;
+  box-sizing: border-box;
+}
+
+.blog-card-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--dark3);
+  border-radius: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.blog-card-title {
+  margin: 16px 0 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.blog-card-excerpt {
+  margin: 12px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--light-grey);
+  line-height: 1.5;
+}
+
+.blog-card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--orange);
+  text-decoration: none;
+}
+
+.blog-card-link:hover {
+  opacity: 0.85;
+}
+
+.blog-teaser-cta {
+  display: inline-block;
+  margin-top: 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--orange);
+  text-decoration: none;
+}
+
+.blog-teaser-cta:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 1023px) {
+  .blog-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .blog-teaser {
+    padding: 80px 24px;
+  }
+
+  .blog-teaser-heading {
+    font-size: 36px;
+  }
+
+  .blog-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* § Final CTA */
 
 .final-cta {
@@ -1370,5 +1637,16 @@ h1 {
 
   .final-cta-heading {
     font-size: 36px;
+  }
+
+  .final-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .final-cta-btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
   }
 }
