@@ -343,8 +343,8 @@ function initCoachSlideshow() {
 
   const slides = [
     { src: '/assets/images/coach/coach-1.jpg', caption: 'S&C Coach, Pretoria Capitals — SA T20 League' },
-    { src: '/assets/images/coach/coach-2.jpg', caption: 'Haryana Steelers, Pro Kabaddi League Season 10' },
-    { src: '/assets/images/coach/coach-3.jpg', caption: 'Soorma Hockey Club — Hockey India League' },
+    { src: '/assets/images/coach/coach-2.jpg', caption: 'Haryana Steelers, Pro Kabaddi League Season 10', objectPosition: 'center top' },
+    { src: '/assets/images/coach/coach-3.jpg', caption: 'Soorma Hockey Club — Hockey India League', objectPosition: 'center top' },
     { src: '/assets/images/coach/coach-4.jpg', caption: 'TEDx Speaker' },
     { src: '/assets/images/coach/coach-5.jpg', caption: 'Presenting at NSCA India — GPS Data Analysis' },
     { src: '/assets/images/coach/coach-6.jpg', caption: 'S&C Masterclass, NIS Patiala — Boxing Federation' },
@@ -372,6 +372,9 @@ function initCoachSlideshow() {
       const img = document.createElement('img');
       img.src = slide.src;
       img.alt = slide.caption;
+      if (slide.objectPosition) {
+        img.style.objectPosition = slide.objectPosition;
+      }
       slidesContainer.appendChild(img);
       return img;
     });
