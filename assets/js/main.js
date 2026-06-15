@@ -116,8 +116,90 @@ function initMobileNav() {
   });
 }
 
+function initCohortBar() {
+  const bar = document.getElementById('cohort-bar');
+  const daysEl = document.getElementById('cohort-days');
+  const dismissBtn = document.querySelector('.cohort-bar-dismiss');
+
+  if (!bar || !daysEl) return;
+
+  if (sessionStorage.getItem('cohort-bar-dismissed') === '1') {
+    bar.classList.add('is-hidden');
+    return;
+  }
+
+  const target = new Date('2026-07-11T00:00:00+05:30');
+  const days = Math.ceil((target - new Date()) / 86400000);
+
+  if (days <= 0) {
+    bar.classList.add('is-hidden');
+    return;
+  }
+
+  daysEl.textContent = days;
+
+  dismissBtn?.addEventListener('click', () => {
+    bar.classList.add('is-hidden');
+    sessionStorage.setItem('cohort-bar-dismissed', '1');
+  });
+}
+
+function initStatsCounter() {
+  const section = document.querySelector('.stats-ticker');
+  if (!section) return;
+
+  const items = section.querySelectorAll('.stat-item');
+  if (!items.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateStat(item) {
+    const target = parseInt(item.dataset.target, 10);
+    const suffix = item.dataset.suffix || '';
+    const numberEl = item.querySelector('.stat-number');
+    if (!numberEl || Number.isNaN(target)) return;
+
+    if (prefersReducedMotion) {
+      numberEl.textContent = target + suffix;
+      return;
+    }
+
+    const duration = 1500;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - (1 - t) * (1 - t);
+      const value = Math.round(eased * target);
+      numberEl.textContent = value + suffix;
+
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        items.forEach(animateStat);
+        observer.unobserve(section);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(section);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-placeholder')?.insertAdjacentHTML('beforeend', NAV_HTML);
   document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', FOOTER_HTML);
   initMobileNav();
+  initCohortBar();
+  initStatsCounter();
 });
