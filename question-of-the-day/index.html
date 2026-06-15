@@ -7,7 +7,7 @@
   <meta name="description" content="Answer one CSCS exam question every day. Free, no signup required. Built by Ranjit Nahak, MSc, CSCS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --orange: #F4511E;
@@ -318,6 +318,33 @@
       margin: 8px 0 0;
     }
 
+    .qotd-coach-block {
+      display: none;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--dark3);
+    }
+
+    .qotd-coach-comment {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--light-grey);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .qotd-coach-attribution {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--grey);
+      margin: 4px 0 0;
+    }
+
     .difficulty-badge {
       display: inline-block;
       margin-top: 12px;
@@ -477,6 +504,18 @@
         <p id="result-explanation" class="qotd-result-explanation"></p>
         <span id="difficulty-badge" class="difficulty-badge"></span>
         <p id="share-nudge" class="share-nudge is-hidden">Share your result → @cscsprep</p>
+        <div id="coach-block" class="qotd-coach-block">
+          <img src="/assets/images/coach/coach-headshot.jpg"
+               alt="Ranjit Nahak"
+               loading="lazy"
+               onerror="this.style.display='none'"
+               style="width:52px; height:52px; border-radius:50%; object-fit:cover;
+                      border: 2px solid var(--orange); flex-shrink:0">
+          <div>
+            <p id="coach-comment" class="qotd-coach-comment"></p>
+            <p class="qotd-coach-attribution">— Ranjit Nahak, MSc, CSCS</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -535,6 +574,8 @@
       resultExplanation: document.getElementById('result-explanation'),
       difficultyBadge: document.getElementById('difficulty-badge'),
       shareNudge: document.getElementById('share-nudge'),
+      coachBlock: document.getElementById('coach-block'),
+      coachComment: document.getElementById('coach-comment'),
       ctaBlock: document.getElementById('cta-block'),
       ctaLink: document.getElementById('cta-link'),
       ctaCopy: document.getElementById('cta-copy'),
@@ -586,6 +627,35 @@
       els.answerButtons.classList.remove('is-hidden');
     }
 
+    function getDomainComment(chapterNumber) {
+      const n = Number(chapterNumber);
+      if (n >= 1 && n <= 8) {
+        return 'Exercise science is the backbone of the CSCS exam. Master the fundamentals and the rest follows.';
+      }
+      if (n === 9) {
+        return 'Sport psychology is worth 10.5% of the exam — don\'t skip it.';
+      }
+      if (n >= 10 && n <= 12) {
+        return 'Nutrition questions catch candidates off guard. Know your macros and timing principles cold.';
+      }
+      if (n >= 13 && n <= 14) {
+        return 'Implementation questions are clinical. Read every word of the question stem carefully.';
+      }
+      if (n >= 15 && n <= 17) {
+        return 'Exercise technique questions test application, not just recall. Visualise the movement.';
+      }
+      if (n >= 18 && n <= 23) {
+        return 'Program design is the biggest domain on the exam. Every mark here counts.';
+      }
+      if (n === 24) {
+        return 'Implementation questions are clinical. Read every word of the question stem carefully.';
+      }
+      if (n >= 25 && n <= 26) {
+        return 'Most candidates underestimate this domain. It\'s 8.7% of the exam — don\'t.';
+      }
+      return 'Every question is a step closer to those three letters. Keep going.';
+    }
+
     function handleAnswer(letter, clickedBtn) {
       const buttons = els.answerButtons.querySelectorAll('.qotd-option');
       if (buttons[0]?.classList.contains('is-locked')) return;
@@ -633,6 +703,8 @@
 
       els.resultExplanation.textContent = qotdData.explanation;
       els.difficultyBadge.textContent = qotdData.difficulty;
+      els.coachComment.textContent = getDomainComment(qotdData.chapter_number);
+      els.coachBlock.style.display = 'flex';
       els.resultBlock.classList.remove('is-hidden');
 
       renderCTA(qotdData.cta_index, qotdData.chapter_number);
