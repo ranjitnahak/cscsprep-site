@@ -196,10 +196,56 @@ function initStatsCounter() {
   observer.observe(section);
 }
 
+const QOTD_ENDPOINT = 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/qotd';
+
+async function initQOTDTeaser() {
+  const section = document.getElementById('qotd-teaser');
+  if (!section) return;
+
+  const skeleton = section.querySelector('.qotd-skeleton');
+  const loaded = section.querySelector('.qotd-loaded');
+
+  function hideSection() {
+    section.classList.add('is-hidden');
+  }
+
+  try {
+    const res = await fetch(QOTD_ENDPOINT);
+    const data = await res.json();
+
+    if (!res.ok || data.error) {
+      hideSection();
+      return;
+    }
+
+    section.querySelector('.qotd-chapter-badge').textContent =
+      `CHAPTER ${data.chapter_number} · ${data.chapter_title}`;
+    section.querySelector('.qotd-domain-pill').textContent = data.domain;
+    section.querySelector('.qotd-question').textContent = data.question_text;
+
+    const optionsEl = section.querySelector('.qotd-options');
+    optionsEl.innerHTML = '';
+    (data.options || []).forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'qotd-option';
+      btn.disabled = true;
+      btn.innerHTML = `<span class="qotd-option-letter">${opt.id}</span><span class="qotd-option-text">${opt.text}</span>`;
+      optionsEl.appendChild(btn);
+    });
+
+    skeleton?.classList.add('is-hidden');
+    loaded.hidden = false;
+  } catch {
+    hideSection();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-placeholder')?.insertAdjacentHTML('beforeend', NAV_HTML);
   document.getElementById('footer-placeholder')?.insertAdjacentHTML('beforeend', FOOTER_HTML);
   initMobileNav();
   initCohortBar();
   initStatsCounter();
+  initQOTDTeaser();
 });
