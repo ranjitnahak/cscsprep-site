@@ -3,18 +3,669 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Question of the Day — CSCS PREP</title>
+  <title>CSCS Question of the Day — Free Daily CSCS Practice | CSCS Prep</title>
+  <meta name="description" content="Answer one CSCS exam question every day. Free, no signup required. Built by Ranjit Nahak, MSc, CSCS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800;900&family=Barlow:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #F4511E;
+      --amber: #FFB347;
+      --blue: #66AAFF;
+      --dark: #0F0F0F;
+      --dark2: #1A1A1A;
+      --dark3: #242424;
+      --white: #FFFFFF;
+      --grey: #AAAAAA;
+      --light-grey: #CCCCCC;
+      --green: #22C55E;
+      --red: #EF4444;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0F0F0F;
+      margin: 0;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--orange);
+      z-index: 100;
+    }
+
+    .qotd-nav {
+      position: fixed;
+      top: 5px;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: var(--dark3);
+      z-index: 99;
+    }
+
+    .qotd-nav-inner {
+      max-width: 680px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qotd-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .qotd-logo-prep {
+      color: var(--orange);
+    }
+
+    .qotd-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .qotd-back:hover {
+      color: var(--white);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
+    }
+
+    .date-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--grey);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 14px;
+      background: var(--orange);
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .qotd-skeleton-card {
+      background: var(--dark2);
+      border-radius: 4px;
+      padding: 32px;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .qotd-shimmer-bar {
+      height: 16px;
+      background: var(--dark3);
+      border-radius: 3px;
+      animation: shimmer 1.4s ease-in-out infinite;
+    }
+
+    .qotd-shimmer-bar--100 { width: 100%; }
+    .qotd-shimmer-bar--80 { width: 80%; }
+    .qotd-shimmer-bar--60 { width: 60%; }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.9; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .qotd-shimmer-bar {
+        animation: none;
+        opacity: 0.6;
+      }
+    }
+
+    .loading-text {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--grey);
+      text-align: center;
+      margin: 16px 0 0;
+    }
+
+    .qotd-question-card {
+      background: var(--dark2);
+      border-top: 3px solid var(--orange);
+      border-radius: 4px;
+      padding: 28px 28px 24px;
+      margin-top: 16px;
+    }
+
+    .domain-pill {
+      display: inline-block;
+      padding: 3px 12px;
+      background: rgba(102, 170, 255, 0.15);
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--blue);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .question-text {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 500;
+      font-size: 21px;
+      color: var(--white);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .answer-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .qotd-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--dark2);
+      border: 1px solid var(--dark3);
+      border-radius: 3px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .qotd-option:hover:not(.is-locked) {
+      border-color: var(--orange);
+    }
+
+    .qotd-option-letter {
+      width: 32px;
+      height: 32px;
+      background: var(--dark3);
+      border-radius: 3px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .qotd-option-text {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--light-grey);
+      text-align: left;
+    }
+
+    .qotd-option-icon {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .qotd-option.is-correct {
+      background: rgba(34, 197, 94, 0.12);
+      border-color: var(--green);
+    }
+
+    .qotd-option.is-correct .qotd-option-letter {
+      background: var(--green);
+    }
+
+    .qotd-option.is-correct .qotd-option-icon {
+      color: var(--green);
+    }
+
+    .qotd-option.is-wrong {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: var(--red);
+    }
+
+    .qotd-option.is-wrong .qotd-option-letter {
+      background: var(--red);
+    }
+
+    .qotd-option.is-wrong .qotd-option-icon {
+      color: var(--red);
+    }
+
+    .qotd-option.is-dimmed {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .qotd-option.is-locked {
+      pointer-events: none;
+    }
+
+    .qotd-result {
+      background: var(--dark2);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+
+    .qotd-result--correct {
+      border-left: 3px solid var(--green);
+    }
+
+    .qotd-result--wrong {
+      border-left: 3px solid var(--red);
+    }
+
+    .qotd-result-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .qotd-result--correct .qotd-result-title {
+      color: var(--green);
+    }
+
+    .qotd-result--wrong .qotd-result-title {
+      color: var(--red);
+    }
+
+    .qotd-result-explanation {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--light-grey);
+      line-height: 1.7;
+      margin: 8px 0 0;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 3px 12px;
+      background: var(--dark3);
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+
+    .share-nudge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--grey);
+      margin: 12px 0 0;
+    }
+
+    .cta-block {
+      margin-top: 24px;
+    }
+
+    .cta-divider {
+      border: none;
+      border-top: 1px solid var(--dark3);
+      margin: 0 0 24px;
+    }
+
+    .qotd-cta-card {
+      background: var(--dark2);
+      border-top: 3px solid var(--orange);
+      border-radius: 4px;
+      padding: 24px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .qotd-cta-card:hover {
+      opacity: 0.92;
+    }
+
+    .qotd-cta-copy {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .qotd-cta-arrow {
+      display: block;
+      margin-top: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--orange);
+    }
+
+    .tomorrow-line {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--grey);
+      margin: 16px 0 0;
+    }
+
+    .qotd-error {
+      background: var(--dark2);
+      border-left: 3px solid var(--amber);
+      border-radius: 4px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .qotd-error-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .qotd-error-sub {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--grey);
+      margin: 6px 0 0;
+    }
+
+    .qotd-error-btn {
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: var(--dark3);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--orange);
+      cursor: pointer;
+    }
+
+    .qotd-error-btn:hover {
+      opacity: 0.85;
+    }
+
+    .qotd-footer {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--grey);
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
-  <div id="nav-placeholder"></div>
-  <main class="page-content">
-    <h1>CSCS PREP — Coming Soon</h1>
+  <div class="top-bar"></div>
+  <nav class="qotd-nav">
+    <div class="qotd-nav-inner">
+      <a href="/" class="qotd-logo">CSCS <span class="qotd-logo-prep">PREP</span></a>
+      <a href="/" class="qotd-back">← Back to cscsprep.in</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <p id="date-label" class="date-label is-hidden"></p>
+    <span id="chapter-badge" class="chapter-badge is-hidden"></span>
+
+    <div id="question-card">
+      <div id="skeleton-state" class="qotd-skeleton-card">
+        <div class="qotd-shimmer-bar qotd-shimmer-bar--100"></div>
+        <div class="qotd-shimmer-bar qotd-shimmer-bar--80"></div>
+        <div class="qotd-shimmer-bar qotd-shimmer-bar--60"></div>
+      </div>
+
+      <div id="question-state" class="qotd-question-card is-hidden">
+        <span id="domain-pill" class="domain-pill"></span>
+        <p id="question-text" class="question-text"></p>
+      </div>
+    </div>
+    <p id="loading-text" class="loading-text">Loading today's question...</p>
+
+    <div id="answer-buttons" class="answer-buttons is-hidden"></div>
+
+    <div id="result-block" class="is-hidden">
+      <div id="result-inner" class="qotd-result">
+        <p id="result-title" class="qotd-result-title"></p>
+        <p id="result-explanation" class="qotd-result-explanation"></p>
+        <span id="difficulty-badge" class="difficulty-badge"></span>
+        <p id="share-nudge" class="share-nudge is-hidden">Share your result → @cscsprep</p>
+      </div>
+    </div>
+
+    <div id="cta-block" class="cta-block is-hidden">
+      <hr class="cta-divider">
+      <a id="cta-link" class="qotd-cta-card" href="#">
+        <p id="cta-copy" class="qotd-cta-copy"></p>
+        <span class="qotd-cta-arrow">→</span>
+      </a>
+      <p id="tomorrow-line" class="tomorrow-line"></p>
+    </div>
+
+    <div id="error-state" class="qotd-error is-hidden">
+      <p class="qotd-error-title">Today's question couldn't be loaded.</p>
+      <p class="qotd-error-sub">Try refreshing the page.</p>
+      <button type="button" class="qotd-error-btn" onclick="location.reload()">Refresh</button>
+    </div>
   </main>
-  <div id="footer-placeholder"></div>
-  <script src="../assets/js/main.js"></script>
+
+  <footer class="qotd-footer">© 2026 CSCS Prep · cscsprep.in &nbsp;|&nbsp; @cscsprep</footer>
+
+  <script>
+    let qotdData = null;
+
+    const QOTD_ENDPOINT = 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/qotd';
+    const POOL_SIZE = 10;
+
+    const CTA_POOL = [
+      {
+        text: 'Join 100+ CSCS candidates in the free WhatsApp group',
+        href: '#whatsapp-placeholder',
+      },
+      {
+        text: 'Book a free 20-min clarity call with Ranjit',
+        href: 'https://cal.com/cscs-prep/cscs-clarity-call',
+      },
+      {
+        text: 'Enrol in the July 11 Cohort — limited seats remaining',
+        href: '#enrol-placeholder',
+      },
+    ];
+
+    const els = {
+      dateLabel: document.getElementById('date-label'),
+      chapterBadge: document.getElementById('chapter-badge'),
+      skeletonState: document.getElementById('skeleton-state'),
+      loadingText: document.getElementById('loading-text'),
+      questionState: document.getElementById('question-state'),
+      domainPill: document.getElementById('domain-pill'),
+      questionText: document.getElementById('question-text'),
+      answerButtons: document.getElementById('answer-buttons'),
+      resultBlock: document.getElementById('result-block'),
+      resultInner: document.getElementById('result-inner'),
+      resultTitle: document.getElementById('result-title'),
+      resultExplanation: document.getElementById('result-explanation'),
+      difficultyBadge: document.getElementById('difficulty-badge'),
+      shareNudge: document.getElementById('share-nudge'),
+      ctaBlock: document.getElementById('cta-block'),
+      ctaLink: document.getElementById('cta-link'),
+      ctaCopy: document.getElementById('cta-copy'),
+      tomorrowLine: document.getElementById('tomorrow-line'),
+      errorState: document.getElementById('error-state'),
+    };
+
+    function hideLoading() {
+      els.skeletonState.classList.add('is-hidden');
+      els.loadingText.classList.add('is-hidden');
+    }
+
+    function showError() {
+      hideLoading();
+      els.dateLabel.classList.add('is-hidden');
+      els.chapterBadge.classList.add('is-hidden');
+      els.questionState.classList.add('is-hidden');
+      els.answerButtons.classList.add('is-hidden');
+      els.resultBlock.classList.add('is-hidden');
+      els.ctaBlock.classList.add('is-hidden');
+      els.errorState.classList.remove('is-hidden');
+    }
+
+    function renderQuestion(data) {
+      hideLoading();
+
+      els.dateLabel.textContent = data.date_label.toUpperCase();
+      els.dateLabel.classList.remove('is-hidden');
+
+      els.chapterBadge.textContent = `CHAPTER ${data.chapter_number} · ${data.chapter_title}`;
+      els.chapterBadge.classList.remove('is-hidden');
+
+      els.domainPill.textContent = data.domain;
+      els.questionText.textContent = data.question_text;
+      els.questionState.classList.remove('is-hidden');
+
+      els.answerButtons.innerHTML = '';
+      (data.options || []).forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'qotd-option';
+        btn.dataset.letter = opt.id;
+        btn.innerHTML =
+          `<span class="qotd-option-letter">${opt.id}</span>` +
+          `<span class="qotd-option-text">${opt.text}</span>`;
+        btn.addEventListener('click', () => handleAnswer(opt.id, btn));
+        els.answerButtons.appendChild(btn);
+      });
+      els.answerButtons.classList.remove('is-hidden');
+    }
+
+    function handleAnswer(letter, clickedBtn) {
+      const buttons = els.answerButtons.querySelectorAll('.qotd-option');
+      if (buttons[0]?.classList.contains('is-locked')) return;
+
+      const isCorrect = letter === qotdData.correct_option;
+
+      buttons.forEach((btn) => btn.classList.add('is-locked'));
+
+      if (isCorrect) {
+        clickedBtn.classList.add('is-correct');
+        clickedBtn.querySelector('.qotd-option-text').insertAdjacentHTML(
+          'afterend',
+          '<span class="qotd-option-icon">✓</span>',
+        );
+        buttons.forEach((btn) => {
+          if (btn !== clickedBtn) btn.classList.add('is-dimmed');
+        });
+
+        els.resultInner.className = 'qotd-result qotd-result--correct';
+        els.resultTitle.textContent = '✓ Correct!';
+        els.shareNudge.classList.remove('is-hidden');
+      } else {
+        clickedBtn.classList.add('is-wrong');
+        clickedBtn.querySelector('.qotd-option-text').insertAdjacentHTML(
+          'afterend',
+          '<span class="qotd-option-icon">✗</span>',
+        );
+
+        buttons.forEach((btn) => {
+          if (btn.dataset.letter === qotdData.correct_option) {
+            btn.classList.add('is-correct');
+            btn.querySelector('.qotd-option-text').insertAdjacentHTML(
+              'afterend',
+              '<span class="qotd-option-icon">✓</span>',
+            );
+          } else if (btn !== clickedBtn) {
+            btn.classList.add('is-dimmed');
+          }
+        });
+
+        els.resultInner.className = 'qotd-result qotd-result--wrong';
+        els.resultTitle.textContent = '✗ Not quite.';
+        els.shareNudge.classList.add('is-hidden');
+      }
+
+      els.resultExplanation.textContent = qotdData.explanation;
+      els.difficultyBadge.textContent = qotdData.difficulty;
+      els.resultBlock.classList.remove('is-hidden');
+
+      renderCTA(qotdData.cta_index, qotdData.chapter_number);
+      els.ctaBlock.classList.remove('is-hidden');
+    }
+
+    function renderCTA(ctaIndex, chapterNumber) {
+      const cta = CTA_POOL[ctaIndex] || CTA_POOL[0];
+      els.ctaCopy.textContent = cta.text;
+      els.ctaLink.href = cta.href;
+
+      const nextChapter = (chapterNumber % POOL_SIZE) + 1;
+      els.tomorrowLine.textContent =
+        `Come back tomorrow for a question from Chapter ${nextChapter}`;
+    }
+
+    async function initQOTD() {
+      try {
+        const res = await fetch(QOTD_ENDPOINT);
+        const data = await res.json();
+
+        if (!res.ok || data.error) {
+          showError();
+          return;
+        }
+
+        qotdData = data;
+        renderQuestion(data);
+      } catch {
+        showError();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initQOTD);
+  </script>
 </body>
 </html>
