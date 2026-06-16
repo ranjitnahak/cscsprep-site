@@ -5,7 +5,7 @@ const CSCS_CONFIG = {
   enrolLink: '#',               // Replace with Razorpay / SSU enrolment link
 
   // Social
-  whatsappLink: '#',            // Replace with permanent WhatsApp group invite link
+  whatsappLink: 'https://chat.whatsapp.com/HiRpWjIgw4gEHKP8hrv4yw',
   instagramUrl: 'https://www.instagram.com/cscsprep/',
   calLink: 'https://cal.com/cscs-prep/cscs-clarity-call',
 
