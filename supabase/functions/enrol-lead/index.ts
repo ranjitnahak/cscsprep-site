@@ -11,6 +11,8 @@ const NOTIFY_EMAIL = "ranjit.nahak@sportsscienceuniversity.com";
 
 interface EnrolLeadBody {
   name?: string;
+  first_name?: string;
+  last_name?: string;
   email?: string;
   phone?: string;
   city?: string;
@@ -95,6 +97,8 @@ function buildNotificationHtml(
     Pick<
       EnrolLeadBody,
       | "name"
+      | "first_name"
+      | "last_name"
       | "email"
       | "phone"
       | "city"
@@ -113,6 +117,8 @@ function buildNotificationHtml(
 <p>New lead from the enrolment form.</p>
 <p>
 <strong>Name:</strong> ${escapeHtml(body.name)}<br>
+<strong>First name:</strong> ${escapeHtml(body.first_name)}<br>
+<strong>Last name:</strong> ${escapeHtml(body.last_name)}<br>
 <strong>Email:</strong> ${escapeHtml(body.email)}<br>
 <strong>Phone:</strong> ${escapeHtml(body.phone)}<br>
 <strong>City:</strong> ${escapeHtml(body.city)}<br>
@@ -126,7 +132,12 @@ function buildNotificationHtml(
 }
 
 function validateBody(body: EnrolLeadBody): string | null {
-  if (!body.name?.trim()) return "Name is required";
+  const firstName = body.first_name?.trim();
+  const lastName = body.last_name?.trim();
+  const combinedName = body.name?.trim() ||
+    (firstName && lastName ? `${firstName} ${lastName}` : "");
+
+  if (!combinedName) return "Name is required";
   if (!body.email?.trim()) return "Email is required";
   if (!body.phone?.trim()) return "Phone is required";
   if (!body.city?.trim()) return "City is required";
@@ -137,6 +148,17 @@ function validateBody(body: EnrolLeadBody): string | null {
   }
   if (!body.biggest_challenge?.trim()) return "biggest_challenge is required";
   return null;
+}
+
+function resolveName(body: EnrolLeadBody): {
+  name: string;
+  first_name: string;
+  last_name: string;
+} {
+  const first_name = body.first_name?.trim() ?? "";
+  const last_name = body.last_name?.trim() ?? "";
+  const name = body.name?.trim() || `${first_name} ${last_name}`.trim();
+  return { name, first_name, last_name };
 }
 
 Deno.serve(async (req) => {
@@ -155,6 +177,8 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: validationError });
     }
 
+    const { name, first_name, last_name } = resolveName(body);
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
@@ -163,11 +187,13 @@ Deno.serve(async (req) => {
     const { data: lead, error: insertError } = await supabase
       .from("leads")
       .insert({
-        name: body.name!.trim(),
+        name,
         email: body.email!.trim(),
         phone: body.phone!.trim(),
         source: "enrol-form",
         metadata: {
+          first_name,
+          last_name,
           city: body.city!.trim(),
           role: body.role!.trim(),
           certifications: body.certifications!.trim(),
@@ -182,13 +208,10 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: insertError?.message ?? "Failed to save lead" });
     }
 
-    const resendKey = Deno.env.get("RESEND_API_KEY");
-    if (!resendKey) {
-      return jsonResponse({ error: "Email service not configured" });
-    }
-
     const payload = {
-      name: body.name!.trim(),
+      name,
+      first_name,
+      last_name,
       email: body.email!.trim(),
       phone: body.phone!.trim(),
       city: body.city!.trim(),
@@ -198,21 +221,43 @@ Deno.serve(async (req) => {
       biggest_challenge: body.biggest_challenge!.trim(),
     };
 
-    await sendEmail(
-      resendKey,
-      payload.email,
-      "You're in — CSCS Prep Upcoming Cohort",
-      buildConfirmationHtml(payload.name),
-    );
+    const emailWarnings: string[] = [];
+    const resendKey = Deno.env.get("RESEND_API_KEY");
 
-    await sendEmail(
-      resendKey,
-      NOTIFY_EMAIL,
-      `New enrolment enquiry — ${payload.name}`,
-      buildNotificationHtml(payload, lead.created_at),
-    );
+    if (!resendKey) {
+      emailWarnings.push("Email service not configured");
+    } else {
+      try {
+        await sendEmail(
+          resendKey,
+          payload.email,
+          "You're in — CSCS Prep Upcoming Cohort",
+          buildConfirmationHtml(payload.first_name || payload.name),
+        );
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Confirmation email failed";
+        console.error(message);
+        emailWarnings.push(message);
+      }
 
-    return jsonResponse({ success: true });
+      try {
+        await sendEmail(
+          resendKey,
+          NOTIFY_EMAIL,
+          `New enrolment enquiry — ${payload.name}`,
+          buildNotificationHtml(payload, lead.created_at),
+        );
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Notification email failed";
+        console.error(message);
+        emailWarnings.push(message);
+      }
+    }
+
+    return jsonResponse({
+      success: true,
+      ...(emailWarnings.length ? { email_warning: emailWarnings.join("; ") } : {}),
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Internal error";
     return jsonResponse({ error: message });

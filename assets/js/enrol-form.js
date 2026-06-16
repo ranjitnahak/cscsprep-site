@@ -6,15 +6,25 @@
   const CARD_ADVANCE_MS = 300;
 
   const ERROR_MESSAGES = {
-    1: 'Please enter your name',
+    1: 'Please enter your first name',
+    1.5: 'Please enter your last name',
     2: 'Please enter a valid email address',
     3: 'Please enter your phone number',
-    4: 'Please enter your city',
-    5: 'Please enter your current role',
-    6: "Please enter your certifications (or 'None')",
+    4: 'Please select your city',
+    4.5: 'Please enter your city',
+    5: 'Please select your role',
+    5.5: 'Please enter your role',
+    6: 'Please select your certifications',
+    6.5: 'Please enter your certification',
   };
 
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const SELECT_FIELDS = [
+    { step: 4, selectId: 'enrol-city', otherWrapId: 'enrol-city-other-wrap', otherInputId: 'enrol-city-other' },
+    { step: 5, selectId: 'enrol-role', otherWrapId: 'enrol-role-other-wrap', otherInputId: 'enrol-role-other' },
+    { step: 6, selectId: 'enrol-certifications', otherWrapId: 'enrol-cert-other-wrap', otherInputId: 'enrol-cert-other' },
+  ];
 
   const form = document.getElementById('enrol-form');
   if (!form) return;
@@ -32,9 +42,15 @@
   let attemptedCscs = null;
   let biggestChallenge = null;
 
-  function getInputForStep(step) {
-    const stepEl = steps.find((s) => Number(s.dataset.step) === step);
-    return stepEl?.querySelector('.enrol-form-input') ?? null;
+  function getSelectValue(selectEl, otherInputEl) {
+    if (selectEl.value === 'other') return otherInputEl?.value.trim() ?? '';
+    return selectEl.value;
+  }
+
+  function toggleOtherInput(selectEl, otherWrapEl) {
+    const isOther = selectEl.value === 'other';
+    otherWrapEl.hidden = !isOther;
+    if (isOther) otherWrapEl.querySelector('input')?.focus();
   }
 
   function getErrorEl(step) {
@@ -48,41 +64,89 @@
     errorEl.textContent = '';
   }
 
-  function showError(step, message) {
+  function shakeEl(el) {
+    if (!el) return;
+    el.classList.add('is-shaking');
+    setTimeout(() => el.classList.remove('is-shaking'), 300);
+  }
+
+  function showError(step, message, el) {
     const errorEl = getErrorEl(step);
-    const input = getInputForStep(step);
     if (errorEl) {
       errorEl.textContent = message;
       errorEl.hidden = false;
     }
-    if (input) {
-      input.classList.add('is-shaking');
-      setTimeout(() => input.classList.remove('is-shaking'), 300);
+    shakeEl(el);
+  }
+
+  function validateNameStep() {
+    clearError(1);
+    const firstName = document.getElementById('enrol-first-name');
+    const lastName = document.getElementById('enrol-last-name');
+    const first = firstName.value.trim();
+    const last = lastName.value.trim();
+
+    if (!first) {
+      showError(1, 'Please enter your first name', firstName);
+      return false;
     }
+    if (!last) {
+      showError(1, 'Please enter your last name', lastName);
+      return false;
+    }
+    return true;
+  }
+
+  function validateSelectStep(step, selectId, otherInputId) {
+    clearError(step);
+    const selectEl = document.getElementById(selectId);
+    const otherInputEl = document.getElementById(otherInputId);
+
+    if (!selectEl.value) {
+      showError(step, ERROR_MESSAGES[step], selectEl);
+      return false;
+    }
+
+    if (selectEl.value === 'other') {
+      const otherVal = otherInputEl?.value.trim() ?? '';
+      if (!otherVal) {
+        const msg = step === 4 ? ERROR_MESSAGES[4.5] : step === 5 ? ERROR_MESSAGES[5.5] : ERROR_MESSAGES[6.5];
+        showError(step, msg, otherInputEl);
+        return false;
+      }
+    }
+
+    return true;
   }
 
   function validateStep(step) {
-    clearError(step);
-
     if (step === 7 || step === 8) return true;
 
-    const input = getInputForStep(step);
-    if (!input) return true;
-
-    const value = input.value.trim();
+    if (step === 1) return validateNameStep();
 
     if (step === 2) {
-      if (!EMAIL_REGEX.test(value)) {
-        showError(step, ERROR_MESSAGES[2]);
+      clearError(step);
+      const input = document.getElementById('enrol-email');
+      if (!EMAIL_REGEX.test(input.value.trim())) {
+        showError(step, ERROR_MESSAGES[2], input);
         return false;
       }
       return true;
     }
 
-    if (!value) {
-      showError(step, ERROR_MESSAGES[step]);
-      return false;
+    if (step === 3) {
+      clearError(step);
+      const input = document.getElementById('enrol-phone');
+      if (!input.value.trim()) {
+        showError(step, ERROR_MESSAGES[3], input);
+        return false;
+      }
+      return true;
     }
+
+    if (step === 4) return validateSelectStep(4, 'enrol-city', 'enrol-city-other');
+    if (step === 5) return validateSelectStep(5, 'enrol-role', 'enrol-role-other');
+    if (step === 6) return validateSelectStep(6, 'enrol-certifications', 'enrol-cert-other');
 
     return true;
   }
@@ -95,10 +159,25 @@
   }
 
   function focusStepInput(step) {
-    const input = getInputForStep(step);
-    if (input) {
-      requestAnimationFrame(() => input.focus());
-    }
+    requestAnimationFrame(() => {
+      if (step === 1) {
+        const first = document.getElementById('enrol-first-name');
+        const last = document.getElementById('enrol-last-name');
+        if (!first.value.trim()) first.focus();
+        else last.focus();
+        return;
+      }
+
+      const stepEl = steps.find((s) => Number(s.dataset.step) === step);
+      const select = stepEl?.querySelector('.enrol-form-select');
+      if (select) {
+        select.focus();
+        return;
+      }
+
+      const input = stepEl?.querySelector('.enrol-form-input');
+      input?.focus();
+    });
   }
 
   function goToStep(nextStep) {
@@ -148,13 +227,21 @@
   }
 
   function buildPayload() {
+    const firstName = document.getElementById('enrol-first-name').value.trim();
+    const lastName = document.getElementById('enrol-last-name').value.trim();
+    const citySelect = document.getElementById('enrol-city');
+    const roleSelect = document.getElementById('enrol-role');
+    const certSelect = document.getElementById('enrol-certifications');
+
     return {
-      name: document.getElementById('enrol-name').value.trim(),
+      name: `${firstName} ${lastName}`,
+      first_name: firstName,
+      last_name: lastName,
       email: document.getElementById('enrol-email').value.trim(),
       phone: document.getElementById('enrol-phone').value.trim(),
-      city: document.getElementById('enrol-city').value.trim(),
-      role: document.getElementById('enrol-role').value.trim(),
-      certifications: document.getElementById('enrol-certifications').value.trim(),
+      city: getSelectValue(citySelect, document.getElementById('enrol-city-other')),
+      role: getSelectValue(roleSelect, document.getElementById('enrol-role-other')),
+      certifications: getSelectValue(certSelect, document.getElementById('enrol-cert-other')),
       attempted_cscs: attemptedCscs,
       biggest_challenge: biggestChallenge,
       source: 'enrol-form',
@@ -173,6 +260,11 @@
     }
   }
 
+  function showSubmitError(message) {
+    submitError.textContent = message || 'Something went wrong. Please try again.';
+    submitError.hidden = false;
+  }
+
   async function submitForm() {
     if (isSubmitting || !biggestChallenge) return;
 
@@ -187,18 +279,23 @@
         body: JSON.stringify(buildPayload()),
       });
 
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error('Invalid response from server');
+      }
 
       if (data.success) {
         window.location.href = '/enrol/thank-you';
         return;
       }
 
-      throw new Error(data.error || 'Submission failed');
-    } catch {
+      showSubmitError(data.error);
       setSubmitLoading(false);
-      submitError.textContent = 'Something went wrong. Please try again.';
-      submitError.hidden = false;
+    } catch (err) {
+      setSubmitLoading(false);
+      showSubmitError(err instanceof Error ? err.message : undefined);
     }
   }
 
@@ -207,6 +304,20 @@
       const step = Number(btn.closest('.enrol-form-step')?.dataset.step);
       advanceFromTextStep(step);
     });
+  });
+
+  SELECT_FIELDS.forEach(({ selectId, otherWrapId, otherInputId }) => {
+    const selectEl = document.getElementById(selectId);
+    const otherWrapEl = document.getElementById(otherWrapId);
+    const otherInputEl = document.getElementById(otherInputId);
+    const step = Number(selectEl?.closest('.enrol-form-step')?.dataset.step);
+
+    selectEl?.addEventListener('change', () => {
+      toggleOtherInput(selectEl, otherWrapEl);
+      clearError(step);
+    });
+
+    otherInputEl?.addEventListener('input', () => clearError(step));
   });
 
   form.querySelectorAll('.enrol-form-step[data-step="7"] .enrol-form-card').forEach((card) => {
@@ -252,6 +363,13 @@
   form.querySelectorAll('.enrol-form-input').forEach((input) => {
     input.addEventListener('input', () => {
       const step = Number(input.closest('.enrol-form-step')?.dataset.step);
+      clearError(step);
+    });
+  });
+
+  form.querySelectorAll('.enrol-form-select').forEach((select) => {
+    select.addEventListener('change', () => {
+      const step = Number(select.closest('.enrol-form-step')?.dataset.step);
       clearError(step);
     });
   });
