@@ -3,3 +3,6 @@ verify_jwt = false
 
 [functions.enrol-lead]
 verify_jwt = false
+
+[functions.qotd-og-image]
+verify_jwt = false
