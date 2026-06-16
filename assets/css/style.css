@@ -674,15 +674,12 @@ h1 {
 .hero-photo {
   flex: 0 0 42%;
   min-height: 480px;
-  background: var(--dark2);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Barlow', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: var(--grey);
+  display: block;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+  background: var(--dark2);
 }
 
 @media (max-width: 1024px) {
