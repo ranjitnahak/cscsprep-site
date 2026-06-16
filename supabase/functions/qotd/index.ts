@@ -29,6 +29,7 @@ Deno.serve(async (req) => {
       .from("chapters")
       .select("id, chapter_number, title, questions!inner(id)")
       .eq("questions.is_active", true)
+      .in("questions.difficulty", ["medium", "hard"])
       .order("chapter_number", { ascending: true });
 
     if (error) {
@@ -56,6 +57,7 @@ Deno.serve(async (req) => {
       )
       .eq("chapter_id", selectedChapter.id)
       .eq("is_active", true)
+      .in("difficulty", ["medium", "hard"])
       .order("id", { ascending: true });
 
     if (qError || !questions?.length) {
