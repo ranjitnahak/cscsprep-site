@@ -11,6 +11,6 @@ const CSCS_CONFIG = {
   enrolLeadEndpoint: 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/enrol-lead',
 
   // Links
-  privacyUrl: 'https://www.cscsprep.in/#',
-  termsUrl: 'https://www.cscsprep.in/#',
+  privacyUrl: 'https://www.cscsprep.in/privacy',
+  termsUrl: 'https://www.cscsprep.in/terms',
 };
