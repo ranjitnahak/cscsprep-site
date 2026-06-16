@@ -2,7 +2,7 @@ const CSCS_CONFIG = {
   // Cohort
   cohortDate: '2026-07-11T00:00:00+05:30',
   cohortLabel: 'July 11 Cohort',
-  enrolLink: '#',               // Replace with Razorpay / SSU enrolment link
+  enrolLink: '/enrol',
 
   // Social
   whatsappLink: 'https://chat.whatsapp.com/HiRpWjIgw4gEHKP8hrv4yw',
