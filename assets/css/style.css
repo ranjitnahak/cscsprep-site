@@ -2,6 +2,7 @@
   --orange: #F4511E; --amber: #FFB347; --blue: #66AAFF;
   --dark: #0F0F0F; --dark2: #1A1A1A; --dark3: #242424;
   --white: #FFFFFF; --grey: #AAAAAA; --light-grey: #CCCCCC;
+  --red: #EF4444;
 }
 
 body {
@@ -473,6 +474,397 @@ h1 {
   .enrol-hero .hero-btn {
     width: 100%;
     text-align: center;
+  }
+}
+
+/* ── Enrol form (typeform) ── */
+
+.enrol-form-body {
+  overflow: hidden;
+}
+
+.enrol-form-body #footer-placeholder {
+  display: none;
+}
+
+.enrol-form-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 69px);
+  background: var(--dark);
+}
+
+.enrol-form-progress {
+  width: 100%;
+  height: 3px;
+  background: var(--dark3);
+  flex-shrink: 0;
+}
+
+.enrol-form-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--orange);
+  transition: width 0.35s ease;
+}
+
+.enrol-form-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px 0;
+  flex-shrink: 0;
+}
+
+.enrol-form-back {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--grey);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+.enrol-form-back:hover {
+  color: var(--white);
+}
+
+.enrol-form-back[hidden] {
+  display: none;
+}
+
+.enrol-form-step-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--grey);
+}
+
+.enrol-form-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.enrol-form {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+}
+
+.enrol-form-step {
+  display: none;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.enrol-form-step.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.enrol-form-step.is-exiting {
+  display: block;
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+.enrol-form-step.is-entering {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.enrol-form-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--grey);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.enrol-form-sublabel {
+  margin: -8px 0 16px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.enrol-form-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--dark2);
+  border: none;
+  border-bottom: 2px solid var(--dark3);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 12px 0;
+  outline: none;
+}
+
+.enrol-form-input:focus {
+  border-bottom-color: var(--orange);
+}
+
+.enrol-form-input.is-shaking {
+  animation: enrol-shake 0.3s ease;
+}
+
+@keyframes enrol-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.enrol-form-hint {
+  margin: 8px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--grey);
+  opacity: 0.6;
+}
+
+.enrol-form-error {
+  margin: 8px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--red);
+}
+
+.enrol-form-error[hidden] {
+  display: none;
+}
+
+.enrol-form-ok,
+.enrol-form-submit {
+  display: inline-block;
+  margin-top: 24px;
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 3px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 12px 28px;
+  cursor: pointer;
+}
+
+.enrol-form-ok:hover,
+.enrol-form-submit:hover {
+  opacity: 0.9;
+}
+
+.enrol-form-submit[hidden] {
+  display: none;
+}
+
+.enrol-form-submit.is-loading {
+  background: transparent;
+  color: var(--grey);
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.enrol-form-submit.is-loading:hover {
+  opacity: 1;
+}
+
+.enrol-form-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--dark3);
+  border-top-color: var(--grey);
+  border-radius: 50%;
+  animation: enrol-spin 0.7s linear infinite;
+}
+
+@keyframes enrol-spin {
+  to { transform: rotate(360deg); }
+}
+
+.enrol-form-submit-error {
+  margin: 12px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--red);
+}
+
+.enrol-form-submit-error[hidden] {
+  display: none;
+}
+
+.enrol-form-cards {
+  display: flex;
+  gap: 16px;
+}
+
+.enrol-form-cards--dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.enrol-form-cards--stack {
+  flex-direction: column;
+}
+
+.enrol-form-card {
+  background: var(--dark2);
+  border: 1px solid var(--dark3);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  padding: 24px 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.enrol-form-card--wide {
+  width: 100%;
+  font-size: 18px;
+  padding: 18px 24px;
+  text-align: left;
+}
+
+.enrol-form-card:hover {
+  border-color: var(--grey);
+}
+
+.enrol-form-card.is-selected {
+  border-color: var(--orange);
+  background: rgba(244, 81, 30, 0.08);
+}
+
+@media (max-width: 767px) {
+  .enrol-form-viewport {
+    padding: 16px;
+  }
+
+  .enrol-form-back {
+    left: 16px;
+  }
+
+  .enrol-form-ok,
+  .enrol-form-submit {
+    width: 100%;
+    text-align: center;
+  }
+
+  .enrol-form-cards--dual {
+    grid-template-columns: 1fr;
+  }
+
+  .enrol-form-card {
+    padding: 20px 24px;
+  }
+}
+
+/* ── Enrol thank-you ── */
+
+.enrol-thank-you {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 69px);
+  background: var(--dark);
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.enrol-thank-you-inner {
+  max-width: 560px;
+}
+
+.enrol-thank-you-check {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.enrol-thank-you-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  color: var(--white);
+  margin: 16px 0 0;
+}
+
+.enrol-thank-you-sub {
+  margin: 16px 0 0;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--light-grey);
+}
+
+.enrol-thank-you-cta {
+  display: inline-block;
+  margin-top: 40px;
+  background: var(--orange);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 14px 28px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.enrol-thank-you-cta:hover {
+  opacity: 0.9;
+}
+
+.enrol-thank-you-back {
+  display: block;
+  margin-top: 20px;
+  color: var(--grey);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.enrol-thank-you-back:hover {
+  color: var(--white);
+}
+
+@media (max-width: 767px) {
+  .enrol-thank-you-heading {
+    font-size: 40px;
   }
 }
 

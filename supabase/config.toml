@@ -1,2 +1,5 @@
 [functions.qotd]
 verify_jwt = false
+
+[functions.enrol-lead]
+verify_jwt = false

@@ -8,6 +8,7 @@ const CSCS_CONFIG = {
   whatsappLink: 'https://chat.whatsapp.com/HiRpWjIgw4gEHKP8hrv4yw',
   instagramUrl: 'https://www.instagram.com/cscsprep/',
   calLink: 'https://cal.com/cscs-prep/cscs-clarity-call',
+  enrolLeadEndpoint: 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/enrol-lead',
 
   // Links
   privacyUrl: 'https://www.cscsprep.in/#',

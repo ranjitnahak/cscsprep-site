@@ -7,53 +7,97 @@
   <meta name="description" content="Join the next CSCS Prep cohort. 16 weeks of structured coaching, masterclasses, assignments, and exam prep — built by a CSCS, for CSCS candidates.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body class="enrol-form-body">
   <div id="nav-placeholder"></div>
-  <main class="page-content enrol-page">
-    <section class="hero enrol-hero">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <span class="hero-label">CSCS FAST TRACK</span>
-          <h1 class="hero-title">
-            <span class="hero-title-line">Join the <span id="enrol-cohort-label"></span></span>
-          </h1>
-          <p class="hero-sub">16 weeks. 26 chapters. Coach-reviewed assignments. One goal.</p>
-          <div class="hero-cta-row">
-            <a href="#" class="hero-btn hero-btn-primary" data-cscs-href="enrolLink">Enrol Now →</a>
-            <a href="#" class="hero-btn hero-btn-secondary" data-cscs-href="calLink" target="_blank" rel="noopener noreferrer">Have questions? Book a free call →</a>
+  <main class="enrol-form-page" id="enrol-form-app">
+    <div class="enrol-form-progress" aria-hidden="true">
+      <div class="enrol-form-progress-fill" id="enrol-progress-fill"></div>
+    </div>
+    <div class="enrol-form-header">
+      <button type="button" class="enrol-form-back" id="enrol-back" hidden aria-label="Previous step">←</button>
+      <span class="enrol-form-step-count" id="enrol-step-count">1 of 8</span>
+    </div>
+    <div class="enrol-form-viewport">
+      <form class="enrol-form" id="enrol-form" novalidate>
+        <div class="enrol-form-step is-active" data-step="1">
+          <label class="enrol-form-label" for="enrol-name">What's your name?</label>
+          <input class="enrol-form-input" type="text" id="enrol-name" name="name" placeholder="Your full name" autocomplete="name" autofocus>
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-1" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="2">
+          <label class="enrol-form-label" for="enrol-email">Your email address</label>
+          <input class="enrol-form-input" type="email" id="enrol-email" name="email" placeholder="you@example.com" autocomplete="email">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-2" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="3">
+          <label class="enrol-form-label" for="enrol-phone">Your phone number</label>
+          <input class="enrol-form-input" type="tel" id="enrol-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-3" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="4">
+          <label class="enrol-form-label" for="enrol-city">Which city are you based in?</label>
+          <input class="enrol-form-input" type="text" id="enrol-city" name="city" placeholder="Mumbai, Delhi, Bengaluru..." autocomplete="address-level2">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-4" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="5">
+          <label class="enrol-form-label" for="enrol-role">What is your current role?</label>
+          <input class="enrol-form-input" type="text" id="enrol-role" name="role" placeholder="S&amp;C Coach, Personal Trainer, Physiotherapist...">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-5" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="6">
+          <label class="enrol-form-label" for="enrol-certifications">What certifications do you currently hold?</label>
+          <p class="enrol-form-sublabel">Type 'None' if you don't have any yet</p>
+          <input class="enrol-form-input" type="text" id="enrol-certifications" name="certifications" placeholder="NSCA-CPT, ACSM, None...">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-6" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="7">
+          <label class="enrol-form-label">Have you attempted the CSCS exam before?</label>
+          <div class="enrol-form-cards enrol-form-cards--dual">
+            <button type="button" class="enrol-form-card" data-value="yes">Yes</button>
+            <button type="button" class="enrol-form-card" data-value="no">No</button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="enrol-details">
-      <div class="enrol-details-inner">
-        <dl class="enrol-facts">
-          <div class="enrol-fact">
-            <dt>Start date</dt>
-            <dd id="enrol-start-date"></dd>
+        <div class="enrol-form-step" data-step="8">
+          <label class="enrol-form-label">What is your biggest challenge in CSCS preparation?</label>
+          <div class="enrol-form-cards enrol-form-cards--stack">
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Don't know where to start">Don't know where to start</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Failing practice questions">Failing practice questions</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Difficulty understanding scientific concepts">Difficulty understanding scientific concepts</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Trouble with the Practical section">Trouble with the Practical section</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Lack of motivation &amp; consistency">Lack of motivation &amp; consistency</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Not preparing for CSCS">Not preparing for CSCS</button>
           </div>
-          <div class="enrol-fact">
-            <dt>Duration</dt>
-            <dd>16 weeks</dd>
-          </div>
-        </dl>
-        <h2 class="enrol-includes-heading">What's included</h2>
-        <ul class="enrol-includes">
-          <li>16+ structured masterclasses</li>
-          <li>Coach-reviewed assignments</li>
-          <li>Chapter quizzes</li>
-          <li>Full question bank access</li>
-          <li>CSCS Exam Simulator</li>
-        </ul>
-      </div>
-    </section>
+          <button type="button" class="enrol-form-submit" id="enrol-submit" hidden>Submit →</button>
+          <p class="enrol-form-submit-error" id="enrol-submit-error" hidden></p>
+        </div>
+      </form>
+    </div>
   </main>
   <div id="footer-placeholder"></div>
   <script src="../assets/js/config.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/enrol-form.js"></script>
 </body>
 </html>
