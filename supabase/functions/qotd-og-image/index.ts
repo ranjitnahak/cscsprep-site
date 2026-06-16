@@ -74,10 +74,22 @@ async function renderImage(element: React.ReactElement): Promise<Uint8Array> {
   return svgToPng(svg);
 }
 
+function questionFontSize(length: number): number {
+  if (length > 180) return 28;
+  if (length > 120) return 32;
+  if (length > 80) return 38;
+  return 44;
+}
+
+function truncateQuestion(text: string, maxLength = 180): string {
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}
+
 function buildOgElement(question: TodaysQuestion): React.ReactElement {
-  const questionLength = question.question_text.length;
-  const questionFontSize =
-    questionLength > 150 ? 20 : questionLength > 100 ? 24 : 28;
+  const questionText = truncateQuestion(question.question_text);
+  const fontSize = questionFontSize(questionText.length);
+  const teaserOptions = question.options.slice(0, 2);
 
   return React.createElement(
     "div",
@@ -98,7 +110,7 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
       "div",
       {
         style: {
-          padding: "20px 48px",
+          padding: "16px 56px",
           display: "flex",
           alignItems: "center",
         },
@@ -134,7 +146,7 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
       {
         style: {
           flex: 1,
-          padding: "0px 48px 0px 48px",
+          padding: "0px 56px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -150,7 +162,7 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
             color: "#AAAAAA",
             letterSpacing: 3,
             textTransform: "uppercase",
-            marginBottom: 20,
+            marginBottom: 16,
           },
         },
         "QUESTION OF THE DAY",
@@ -161,19 +173,19 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
           style: {
             fontFamily: "Barlow Condensed",
             fontWeight: 700,
-            fontSize: questionFontSize,
+            fontSize: fontSize,
             color: "#FFFFFF",
-            lineHeight: 1.35,
-            maxWidth: 1000,
-            marginBottom: 28,
+            lineHeight: 1.3,
+            maxWidth: 1080,
+            marginBottom: 32,
           },
         },
-        question.question_text,
+        questionText,
       ),
       React.createElement(
         "div",
-        { style: { display: "flex", flexDirection: "column", gap: 8 } },
-        ...question.options.map((opt) =>
+        { style: { display: "flex", flexDirection: "column", gap: 12 } },
+        ...teaserOptions.map((opt) =>
           React.createElement(
             "div",
             {
@@ -181,7 +193,7 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
               style: {
                 display: "flex",
                 flexDirection: "row",
-                gap: 12,
+                gap: 14,
                 alignItems: "flex-start",
               },
             },
@@ -191,9 +203,9 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
                 style: {
                   fontFamily: "Barlow Condensed",
                   fontWeight: 700,
-                  fontSize: 18,
+                  fontSize: 24,
                   color: "#F4511E",
-                  minWidth: 24,
+                  minWidth: 28,
                 },
               },
               `${opt.id}.`,
@@ -204,9 +216,9 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
                 style: {
                   fontFamily: "Barlow",
                   fontWeight: 400,
-                  fontSize: 18,
+                  fontSize: 24,
                   color: "#CCCCCC",
-                  lineHeight: 1.5,
+                  lineHeight: 1.4,
                 },
               },
               opt.text,
@@ -220,26 +232,26 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
       {
         style: {
           width: WIDTH,
-          height: 52,
+          height: 56,
           background: "#1A1A1A",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0px 48px",
+          padding: "0px 56px",
         },
       },
       React.createElement(
         "span",
         {
           style: {
-            fontFamily: "Barlow",
-            fontWeight: 400,
-            fontSize: 13,
+            fontFamily: "Barlow Condensed",
+            fontWeight: 600,
+            fontSize: 16,
             color: "#AAAAAA",
           },
         },
-        "Try it. No sign-up required. Your answers are never logged.",
+        "Tap to see all options →",
       ),
       React.createElement(
         "span",
@@ -247,7 +259,7 @@ function buildOgElement(question: TodaysQuestion): React.ReactElement {
           style: {
             fontFamily: "Barlow Condensed",
             fontWeight: 600,
-            fontSize: 13,
+            fontSize: 16,
             color: "#F4511E",
           },
         },
