@@ -181,9 +181,11 @@
     }
 
     .form-input,
-    .form-textarea {
+    .form-textarea,
+    .form-select {
       display: block;
       width: 100%;
+      box-sizing: border-box;
       background: var(--dark2);
       border: none;
       border-bottom: 2px solid var(--dark3);
@@ -193,6 +195,28 @@
       font-size: 18px;
       padding: 12px 0;
       outline: none;
+    }
+
+    .form-select {
+      appearance: none;
+      cursor: pointer;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23AAAAAA' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+    }
+
+    .form-select option {
+      background: var(--dark2);
+      color: var(--white);
+    }
+
+    .other-wrap {
+      margin-top: 16px;
+    }
+
+    .other-wrap[hidden] {
+      display: none;
     }
 
     .form-textarea {
@@ -205,7 +229,8 @@
     }
 
     .form-input:focus,
-    .form-textarea:focus {
+    .form-textarea:focus,
+    .form-select:focus {
       border-bottom-color: var(--orange);
     }
 
@@ -214,7 +239,8 @@
     }
 
     .form-input.is-shaking,
-    .form-textarea.is-shaking {
+    .form-textarea.is-shaking,
+    .form-select.is-shaking {
       animation: shake 0.3s ease;
     }
 
@@ -305,26 +331,39 @@
 
     .photo-drop {
       margin-top: 24px;
-      border: 2px dashed var(--dark3);
+      border: 2px dashed rgba(244, 81, 30, 0.45);
       border-radius: 6px;
-      padding: 32px 20px;
+      padding: 40px 24px;
       text-align: center;
       cursor: pointer;
-      transition: border-color 0.15s;
+      background: rgba(244, 81, 30, 0.06);
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    .photo-drop:hover { border-color: var(--orange); }
+    .photo-drop:hover {
+      border-color: var(--orange);
+      background: rgba(244, 81, 30, 0.1);
+    }
 
     .photo-drop.has-preview {
       padding: 16px;
+      background: var(--dark2);
+      border-color: var(--dark3);
+    }
+
+    .photo-drop-icon {
+      display: block;
+      margin: 0 auto 12px;
+      color: var(--orange);
     }
 
     .photo-drop-text {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: 15px;
-      color: var(--grey);
+      font-size: 16px;
+      color: var(--light-grey);
       margin: 0;
+      line-height: 1.4;
     }
 
     .photo-preview {
@@ -468,7 +507,17 @@
         <p class="screen-heading">Professional details</p>
         <div class="field-group">
           <label class="field-label" for="profession">Profession</label>
-          <input class="form-input" type="text" id="profession">
+          <select class="form-select" id="profession">
+            <option value="" disabled selected>Select your profession</option>
+            <option value="S&C Coach">S&amp;C Coach</option>
+            <option value="Physiotherapist">Physiotherapist</option>
+            <option value="Skill Coach">Skill Coach</option>
+            <option value="Athlete">Athlete</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="other-wrap" id="profession-other-wrap" hidden>
+            <input class="form-input" type="text" id="profession-other" placeholder="Enter your profession">
+          </div>
         </div>
         <div class="field-group">
           <label class="field-label" for="workplace">Where do you work</label>
@@ -476,7 +525,49 @@
         </div>
         <div class="field-group">
           <label class="field-label" for="city">City</label>
-          <input class="form-input" type="text" id="city">
+          <select class="form-select" id="city">
+            <option value="" disabled selected>Select your city</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Faridabad">Faridabad</option>
+            <option value="Ghaziabad">Ghaziabad</option>
+            <option value="Gurugram">Gurugram</option>
+            <option value="Guwahati">Guwahati</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Indore">Indore</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jodhpur">Jodhpur</option>
+            <option value="Kanpur">Kanpur</option>
+            <option value="Kochi">Kochi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Noida">Noida</option>
+            <option value="Patna">Patna</option>
+            <option value="Pune">Pune</option>
+            <option value="Raipur">Raipur</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Ranchi">Ranchi</option>
+            <option value="Srinagar">Srinagar</option>
+            <option value="Surat">Surat</option>
+            <option value="Thane">Thane</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Varanasi">Varanasi</option>
+            <option value="Visakhapatnam">Visakhapatnam</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="other-wrap" id="city-other-wrap" hidden>
+            <input class="form-input" type="text" id="city-other" placeholder="Enter your city">
+          </div>
         </div>
         <p class="form-error" id="error-professional" hidden></p>
         <button type="button" class="btn" id="btn-professional">Continue →</button>
@@ -521,6 +612,10 @@
         </div>
         <p class="form-error" id="error-feedback" hidden></p>
         <div class="photo-drop" id="photo-drop" role="button" tabindex="0" aria-label="If you can share a picture of yours which would go with the testimonial">
+          <svg class="photo-drop-icon" id="photo-drop-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
           <p class="photo-drop-text" id="photo-drop-text">If you can share a picture of yours which would go with the testimonial</p>
           <img class="photo-preview" id="photo-preview" alt="Workshop photo preview" hidden>
         </div>
@@ -667,26 +762,50 @@
       return true;
     }
 
+    function getSelectValue(selectEl, otherInputEl) {
+      if (selectEl.value === 'other') return otherInputEl?.value.trim() ?? '';
+      return selectEl.value;
+    }
+
+    function toggleOtherInput(selectEl, otherWrapEl) {
+      const isOther = selectEl.value === 'other';
+      otherWrapEl.hidden = !isOther;
+      if (isOther) otherWrapEl.querySelector('input')?.focus();
+    }
+
     function validateProfessional() {
       clearError('error-professional');
-      const profession = document.getElementById('profession');
+      const professionSelect = document.getElementById('profession');
+      const professionOther = document.getElementById('profession-other');
       const workplace = document.getElementById('workplace');
-      const city = document.getElementById('city');
+      const citySelect = document.getElementById('city');
+      const cityOther = document.getElementById('city-other');
 
-      const prof = profession.value.trim();
-      const work = workplace.value.trim();
-      const cityVal = city.value.trim();
-
-      if (!prof) {
-        showError('error-professional', 'Please enter your profession', profession);
+      if (!professionSelect.value) {
+        showError('error-professional', 'Please select your profession', professionSelect);
         return false;
       }
+
+      const prof = getSelectValue(professionSelect, professionOther);
+      if (professionSelect.value === 'other' && !prof) {
+        showError('error-professional', 'Please enter your profession', professionOther);
+        return false;
+      }
+
+      const work = workplace.value.trim();
       if (!work) {
         showError('error-professional', 'Please tell us where you work', workplace);
         return false;
       }
-      if (!cityVal) {
-        showError('error-professional', 'Please enter your city', city);
+
+      if (!citySelect.value) {
+        showError('error-professional', 'Please select your city', citySelect);
+        return false;
+      }
+
+      const cityVal = getSelectValue(citySelect, cityOther);
+      if (citySelect.value === 'other' && !cityVal) {
+        showError('error-professional', 'Please enter your city', cityOther);
         return false;
       }
 
@@ -844,10 +963,29 @@
       btn.addEventListener('click', () => selectRating(btn));
     });
 
+    const professionSelect = document.getElementById('profession');
+    const professionOtherWrap = document.getElementById('profession-other-wrap');
+    const citySelect = document.getElementById('city');
+    const cityOtherWrap = document.getElementById('city-other-wrap');
+
+    professionSelect.addEventListener('change', () => {
+      toggleOtherInput(professionSelect, professionOtherWrap);
+      clearError('error-professional');
+    });
+
+    citySelect.addEventListener('change', () => {
+      toggleOtherInput(citySelect, cityOtherWrap);
+      clearError('error-professional');
+    });
+
+    document.getElementById('profession-other').addEventListener('input', () => clearError('error-professional'));
+    document.getElementById('city-other').addEventListener('input', () => clearError('error-professional'));
+
     const photoDrop = document.getElementById('photo-drop');
     const photoInput = document.getElementById('photo-input');
     const photoPreview = document.getElementById('photo-preview');
     const photoDropText = document.getElementById('photo-drop-text');
+    const photoDropIcon = document.getElementById('photo-drop-icon');
 
     photoDrop.addEventListener('click', () => photoInput.click());
     photoDrop.addEventListener('keydown', (e) => {
@@ -864,6 +1002,7 @@
       photoPreview.src = URL.createObjectURL(file);
       photoPreview.hidden = false;
       photoDropText.hidden = true;
+      photoDropIcon.hidden = true;
       photoDrop.classList.add('has-preview');
     });
 
