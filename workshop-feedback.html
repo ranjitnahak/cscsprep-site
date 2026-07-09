@@ -213,7 +213,8 @@
       border-color: var(--orange);
     }
 
-    .form-input.is-shaking {
+    .form-input.is-shaking,
+    .form-textarea.is-shaking {
       animation: shake 0.3s ease;
     }
 
@@ -257,30 +258,6 @@
     .btn:disabled {
       opacity: 0.4;
       cursor: default;
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      margin-top: 12px;
-      background: transparent;
-      color: var(--white);
-      border: 1px solid var(--dark3);
-      border-radius: 3px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      padding: 12px 28px;
-      cursor: pointer;
-      width: 100%;
-      text-align: center;
-    }
-
-    .btn-secondary:hover { border-color: var(--grey); }
-
-    .btn-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
     }
 
     .rating-grid {
@@ -542,15 +519,13 @@
           <label class="field-label" for="feedback-text">Your feedback</label>
           <textarea class="form-textarea" id="feedback-text" rows="4" placeholder="What stood out? What could be better?"></textarea>
         </div>
-        <div class="photo-drop" id="photo-drop" role="button" tabindex="0" aria-label="Add a photo from the workshop">
-          <p class="photo-drop-text" id="photo-drop-text">Add a photo from the workshop</p>
+        <p class="form-error" id="error-feedback" hidden></p>
+        <div class="photo-drop" id="photo-drop" role="button" tabindex="0" aria-label="If you can share a picture of yours which would go with the testimonial">
+          <p class="photo-drop-text" id="photo-drop-text">If you can share a picture of yours which would go with the testimonial</p>
           <img class="photo-preview" id="photo-preview" alt="Workshop photo preview" hidden>
         </div>
         <input type="file" id="photo-input" accept="image/*" hidden>
-        <div class="btn-row">
-          <button type="button" class="btn" id="btn-submit">Submit Feedback →</button>
-          <button type="button" class="btn-secondary" id="btn-submit-no-photo">Continue without a photo</button>
-        </div>
+        <button type="button" class="btn" id="btn-submit">Submit Feedback →</button>
       </div>
 
       <!-- Screen 6: Thank you -->
@@ -838,8 +813,20 @@
       await insertContact();
     }
 
+    function validateFeedback() {
+      clearError('error-feedback');
+      const feedbackEl = document.getElementById('feedback-text');
+      const feedback = feedbackEl.value.trim();
+      if (!feedback) {
+        showError('error-feedback', 'Please share your feedback', feedbackEl);
+        return false;
+      }
+      state.feedback = feedback;
+      return true;
+    }
+
     function submitFeedback() {
-      state.feedback = document.getElementById('feedback-text').value.trim();
+      if (!validateFeedback()) return;
       goToScreen('thankyou');
       persistData();
     }
@@ -852,7 +839,6 @@
       if (state.rating) goToScreen('feedback');
     });
     document.getElementById('btn-submit').addEventListener('click', submitFeedback);
-    document.getElementById('btn-submit-no-photo').addEventListener('click', submitFeedback);
 
     document.querySelectorAll('.rating-btn').forEach((btn) => {
       btn.addEventListener('click', () => selectRating(btn));
