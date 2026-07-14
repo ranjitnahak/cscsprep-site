@@ -6,3 +6,6 @@ verify_jwt = false
 
 [functions.qotd-og-image]
 verify_jwt = false
+
+[functions.submit-lead]
+verify_jwt = false
