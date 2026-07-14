@@ -528,7 +528,11 @@ async function applyCoupon() {
         'Authorization': 'Bearer sb_publishable_nJSi1W_VIeM904W3WnNKzw_1YGbKn8A',
         'apikey': 'sb_publishable_nJSi1W_VIeM904W3WnNKzw_1YGbKn8A'
       },
-      body: JSON.stringify({ code })
+      body: JSON.stringify({
+        coupon_code: code,
+        product_slug: 'question_bank_cscs',
+        duration_days: null
+      })
     });
     const data = await res.json();
     if (data.valid) {
@@ -538,7 +542,7 @@ async function applyCoupon() {
       msg.className = 'coupon-msg ok';
       setTimeout(() => showPage('page-details'), 900);
     } else {
-      msg.textContent = data.message || 'Invalid coupon code. Please try again.';
+      msg.textContent = data.error || 'Invalid coupon code. Please try again.';
       msg.className = 'coupon-msg err';
     }
   } catch(e) {
