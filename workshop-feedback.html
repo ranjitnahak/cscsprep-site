@@ -926,10 +926,46 @@
       }
     }
 
+    async function insertLead(photoPath) {
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+          method: 'POST',
+          headers: {
+            apikey: SUPABASE_ANON,
+            Authorization: 'Bearer ' + SUPABASE_ANON,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          },
+          body: JSON.stringify({
+            name: state.firstName + ' ' + state.lastName,
+            email: state.email,
+            phone: state.phone,
+            source: 'workshop',
+            metadata: {
+              first_name: state.firstName,
+              last_name: state.lastName,
+              profession: state.profession,
+              workplace: state.workplace,
+              city: state.city,
+              rating: state.rating,
+              feedback: state.feedback || null,
+              photo_path: photoPath,
+              workshop: WORKSHOP_NAME,
+              tags: ['speed-agility-workshop-jul26'],
+            },
+          }),
+        });
+        if (!res.ok) console.error('leads insert failed:', res.status, await res.text());
+      } catch (err) {
+        console.error('leads insert error:', err);
+      }
+    }
+
     async function persistData() {
       const photoPath = await uploadPhoto();
       await insertWorkshopLead(photoPath);
       await insertContact();
+      await insertLead(photoPath);
     }
 
     function validateFeedback() {

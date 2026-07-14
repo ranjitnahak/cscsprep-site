@@ -61,6 +61,13 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const resolvedScore = score ?? 0;
+    const resolvedTier = tier ?? "Unknown";
+    const resolvedDomainScores = domain_scores ?? {};
+    const resolvedPaymentMethod = payment_method ?? "razorpay";
+    const resolvedCoupon = coupon_used ?? null;
+    const resolvedPaymentId = razorpay_payment_id ?? null;
+
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
     const serviceKey = Deno.env.get("SERVICE_ROLE_KEY") ??
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
@@ -74,13 +81,13 @@ Deno.serve(async (req: Request) => {
         last_name,
         email,
         whatsapp,
-        score: score ?? 0,
+        score: resolvedScore,
         total: 20,
-        tier: tier ?? "Unknown",
-        domain_scores: domain_scores ?? {},
-        payment_method: payment_method ?? "razorpay",
-        coupon_used: coupon_used ?? null,
-        razorpay_payment_id: razorpay_payment_id ?? null,
+        tier: resolvedTier,
+        domain_scores: resolvedDomainScores,
+        payment_method: resolvedPaymentMethod,
+        coupon_used: resolvedCoupon,
+        razorpay_payment_id: resolvedPaymentId,
       })
       .select();
 
@@ -96,6 +103,28 @@ Deno.serve(async (req: Request) => {
     }
 
     console.log("Lead inserted:", JSON.stringify(data));
+
+    const { error: leadsError } = await supabase.from("leads").insert({
+      name: `${first_name} ${last_name}`.trim(),
+      email,
+      phone: whatsapp,
+      source: "blood-test",
+      metadata: {
+        first_name,
+        last_name,
+        score: resolvedScore,
+        total: 20,
+        tier: resolvedTier,
+        domain_scores: resolvedDomainScores,
+        payment_method: resolvedPaymentMethod,
+        coupon_used: resolvedCoupon,
+        razorpay_payment_id: resolvedPaymentId,
+      },
+    });
+
+    if (leadsError) {
+      console.error("leads insert error:", JSON.stringify(leadsError));
+    }
 
     return new Response(
       JSON.stringify({ success: true, message: "Lead saved" }),
