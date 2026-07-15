@@ -61,6 +61,19 @@ body { font-family: 'Barlow', sans-serif; background: var(--dark); color: var(--
 .payment-box { background: var(--dark2); border: 1px solid #2a2a2a; border-radius: 4px; padding: 32px; margin-bottom: 24px; }
 .price-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
 .price-main { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 52px; color: var(--orange); }
+.price-was {
+  text-decoration: line-through;
+  color: var(--grey);
+  font-weight: 600;
+  font-size: 0.55em;
+  margin-right: 10px;
+  opacity: 0.7;
+}
+.btn .price-was {
+  font-size: inherit;
+  margin-right: 6px;
+  opacity: 0.85;
+}
 .price-sub { font-size: 13px; color: var(--grey); text-align: left; line-height: 1.5; }
 .btn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; background: var(--orange); color: var(--white); border: none; padding: 16px 40px; border-radius: 3px; cursor: pointer; transition: opacity .2s, transform .15s; width: 100%; }
 .btn:hover { opacity: .85; transform: translateY(-1px); }
@@ -180,10 +193,13 @@ body { font-family: 'Barlow', sans-serif; background: var(--dark); color: var(--
       </div>
       <div class="payment-box">
         <div class="price-row">
-          <div class="price-main">₹9</div>
+          <div class="price-main">
+            <span class="price-was">₹299</span>
+            <span class="price-now">₹9</span>
+          </div>
           <div class="price-sub">One-time access<br>Full personalised report included</div>
         </div>
-        <button class="btn" onclick="startRazorpay()">Pay ₹9 &amp; Begin →</button>
+        <button class="btn" onclick="startRazorpay()">Pay <span class="price-was">₹299</span> ₹9 &amp; Begin →</button>
         <div class="coupon-row">
           <input type="text" id="couponInput" placeholder="Have a coupon code?">
           <button class="btn-apply" onclick="applyCoupon()">Apply</button>
