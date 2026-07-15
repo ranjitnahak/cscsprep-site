@@ -135,11 +135,6 @@ function applyCscsConfig() {
     cohortDateLabel.textContent = formatCohortDateShort();
   }
 
-  const heroEnrolBtn = document.getElementById('hero-enrol-btn');
-  if (heroEnrolBtn) {
-    heroEnrolBtn.textContent = `ENROL IN THE ${labelUpper} →`;
-  }
-
   const finalCtaPre = document.getElementById('final-cta-pre');
   if (finalCtaPre) {
     finalCtaPre.textContent = `LIMITED SEATS · ${labelUpper}`;

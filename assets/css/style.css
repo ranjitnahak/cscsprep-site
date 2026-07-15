@@ -1078,6 +1078,28 @@ h1 {
   opacity: 0.9;
 }
 
+.hero-btn-blood-test {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-btn-price s {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.hero-cta-caption {
+  flex-basis: 100%;
+  margin: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
 .hero-btn-secondary {
   background: transparent;
   border: 1px solid var(--orange);
