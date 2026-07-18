@@ -56,21 +56,6 @@ body.clarity-call-body {
   }
 }
 
-.cc-wordmark {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 18px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--white);
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.cc-wordmark:hover {
-  opacity: 0.9;
-}
-
 .cc-nav {
   display: none;
   align-items: center;
@@ -629,14 +614,9 @@ body.clarity-call-body {
   }
 }
 
-.cc-footer-wordmark {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
+.cc-footer-logo {
   font-size: 16px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
+  opacity: 0.7;
 }
 
 .cc-footer-links {
@@ -660,7 +640,6 @@ body.clarity-call-body {
 .cc-btn:focus-visible,
 .cc-nav a:focus-visible,
 .cc-menu-btn:focus-visible,
-.cc-wordmark:focus-visible,
 .cc-mobile-nav a:focus-visible,
 .cc-footer-links a:focus-visible {
   outline: 2px solid var(--orange);
