@@ -1,7 +1,7 @@
 const CSCS_CONFIG = {
   // Cohort
   cohortDate: '2026-07-11T00:00:00+05:30',
-  cohortLabel: 'July 11 Cohort',
+  cohortLabel: 'Next Cohort',
   enrolLink: '/enrol',
 
   // Social
