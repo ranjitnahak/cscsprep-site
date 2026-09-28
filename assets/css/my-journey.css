@@ -4,6 +4,7 @@ body.mj-body {
   padding-top: 0;
   display: block;
   align-items: stretch;
+  scroll-padding-top: 80px;
 }
 
 .mj-top-bar {
@@ -133,13 +134,20 @@ body.mj-body {
   overflow: hidden;
 }
 
+.mj-figure.is-loaded {
+  overflow: visible;
+  height: auto;
+}
+
 .mj-figure.is-loaded img {
   display: block;
   width: 100%;
   height: auto;
+  max-width: 100%;
   vertical-align: middle;
   position: relative;
   z-index: 1;
+  object-fit: unset;
 }
 
 .mj-figure.is-loaded .mj-figure-fallback {
@@ -543,6 +551,7 @@ body.mj-body {
 @media (min-width: 768px) {
   .mj-section {
     padding: 48px 0;
+    scroll-margin-top: 80px;
   }
 
   .mj-inner {
@@ -579,8 +588,6 @@ body.mj-body {
   .mj-split-block .mj-figure,
   .mj-timeline-card:not(.mj-timeline-card-no-image) .mj-figure {
     margin-bottom: 0;
-    aspect-ratio: 4 / 3;
-    min-height: 420px;
   }
 
   .mj-split-block .mj-figure-fallback,
@@ -588,19 +595,12 @@ body.mj-body {
     min-height: 420px;
   }
 
-  .mj-split-block .mj-figure.is-loaded,
-  .mj-timeline-card .mj-figure.is-loaded {
-    display: block;
-    width: 100%;
-  }
-
   .mj-split-block .mj-figure.is-loaded img,
   .mj-timeline-card .mj-figure.is-loaded img {
     width: 100%;
-    height: 100%;
-    min-height: 420px;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    object-fit: unset;
+    object-position: unset;
   }
 
   .mj-timeline {
