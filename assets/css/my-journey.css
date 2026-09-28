@@ -41,11 +41,7 @@ body.mj-body {
   box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
-  .mj-inner {
-    padding: 64px 24px;
-  }
-}
+/* Tablet/desktop layout — mobile (<768px) uses base .mj-inner rules above */
 
 .mj-label {
   font-family: 'Barlow Condensed', sans-serif;
@@ -180,22 +176,6 @@ body.mj-body {
   margin-bottom: 40px;
 }
 
-@media (min-width: 768px) {
-  .mj-split-block {
-    flex-direction: row;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .mj-split-block .mj-figure {
-    flex: 0 0 42%;
-    margin-bottom: 0;
-  }
-
-  .mj-split-block-reverse {
-    flex-direction: row-reverse;
-  }
-}
 
 /* ── Steps ── */
 
@@ -310,17 +290,6 @@ body.mj-body {
   margin: 0 0 8px;
 }
 
-@media (min-width: 768px) {
-  .mj-timeline-card:not(.mj-timeline-card-no-image) {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 24px;
-  }
-
-  .mj-timeline-card .mj-figure-timeline {
-    flex: 0 0 200px;
-  }
-}
 
 /* ── Questions ── */
 
@@ -553,6 +522,203 @@ body.mj-body {
 .mj-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Decision #1 band (full width from tablet up) ── */
+
+@media (min-width: 768px) {
+  .mj-section-decision1 {
+    background: var(--dark2);
+  }
+
+  .mj-section-decision1 .mj-inner {
+    border-left: 4px solid var(--orange);
+    padding-block: 120px;
+    padding-left: 52px;
+  }
+}
+
+/* ── Tablet + desktop layout (768px+) ── */
+
+@media (min-width: 768px) {
+  .mj-section {
+    padding: 48px 0;
+  }
+
+  .mj-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    box-sizing: border-box;
+  }
+
+  .mj-inner-feature {
+    max-width: 1200px;
+  }
+
+  .mj-split-block {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+
+  .mj-split-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .mj-split-block-reverse .mj-figure {
+    order: 2;
+  }
+
+  .mj-split-block-reverse .mj-split-copy {
+    order: 1;
+  }
+
+  .mj-split-block .mj-figure,
+  .mj-timeline-card:not(.mj-timeline-card-no-image) .mj-figure {
+    margin-bottom: 0;
+    aspect-ratio: 4 / 3;
+    min-height: 420px;
+  }
+
+  .mj-split-block .mj-figure-fallback,
+  .mj-timeline-card .mj-figure-fallback {
+    min-height: 420px;
+  }
+
+  .mj-split-block .mj-figure.is-loaded,
+  .mj-timeline-card .mj-figure.is-loaded {
+    display: block;
+    width: 100%;
+  }
+
+  .mj-split-block .mj-figure.is-loaded img,
+  .mj-timeline-card .mj-figure.is-loaded img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .mj-timeline {
+    gap: 80px;
+  }
+
+  .mj-timeline-card:not(.mj-timeline-card-no-image) {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 64px;
+    align-items: center;
+    padding: 36px;
+  }
+
+  .mj-timeline-card .mj-figure {
+    margin-bottom: 0;
+  }
+
+  .mj-closing-line {
+    margin-top: 48px;
+  }
+
+  .mj-label {
+    font-size: clamp(13px, 1.5vw, 16px);
+  }
+
+  .mj-block-title {
+    font-size: clamp(22px, 4vw, 44px);
+  }
+
+  .mj-heading-hero {
+    font-size: clamp(32px, 7vw, 88px);
+  }
+
+  .mj-heading-decision {
+    font-size: clamp(28px, 8vw, 96px);
+  }
+
+  .mj-heading-feature {
+    font-size: clamp(36px, 9vw, 104px);
+  }
+
+  .mj-heading:not(.mj-heading-hero):not(.mj-heading-decision):not(.mj-heading-feature) {
+    font-size: clamp(28px, 5vw, 40px);
+  }
+
+  .mj-body-text {
+    font-size: clamp(16px, 2.2vw, 22px);
+    line-height: 1.6;
+  }
+
+  .mj-closing-line {
+    font-size: clamp(17px, 2.5vw, 28px);
+    font-weight: 600;
+    max-width: 900px;
+  }
+
+  .mj-subhead {
+    font-size: clamp(17px, 2vw, 24px);
+  }
+
+  .mj-q-text {
+    font-size: clamp(16px, 2.2vw, 22px);
+  }
+
+  .mj-timeline-title {
+    font-size: clamp(18px, 2.5vw, 32px);
+  }
+
+  .mj-section-feature .mj-body-text p {
+    font-size: clamp(16px, 2.2vw, 22px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .mj-label {
+    font-size: 16px;
+  }
+
+  .mj-block-title {
+    font-size: 44px;
+  }
+
+  .mj-heading-hero {
+    font-size: 88px;
+  }
+
+  .mj-heading-decision {
+    font-size: 96px;
+  }
+
+  .mj-heading-feature {
+    font-size: 104px;
+  }
+
+  .mj-body-text {
+    font-size: 22px;
+  }
+
+  .mj-closing-line {
+    font-size: 28px;
+  }
+
+  .mj-subhead {
+    font-size: 24px;
+  }
+
+  .mj-q-text {
+    font-size: 22px;
+  }
+
+  .mj-timeline-title {
+    font-size: 32px;
+  }
+
+  .mj-section-feature .mj-body-text p {
+    font-size: 22px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
