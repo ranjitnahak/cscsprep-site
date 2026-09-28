@@ -1,0 +1,6 @@
+# Story images (drop JPGs here; page uses <img> + filename fallback until loaded):
+# /assets/images/my-journey/hero.jpg, engineer.jpg, ironman.jpg, cultfit.jpg, cscs.jpg,
+# sai-wrestling.jpg, neufc.jpg, gymnastics.jpg, steelers-trophy.jpg, tedx.jpg
+#
+# Link preview only (meta og:image / twitter:image — not shown on page):
+# /assets/images/my-journey/og-image.jpg — 1200×630, JPG, under 300KB (WhatsApp may drop larger files)
