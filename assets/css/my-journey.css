@@ -298,6 +298,16 @@ body.mj-body {
   margin: 0 0 8px;
 }
 
+.mj-timeline-subsection {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+}
+
+.mj-timeline-subsection .mj-label {
+  margin-bottom: 0;
+}
+
 
 /* ── Questions ── */
 
@@ -586,7 +596,7 @@ body.mj-body {
   }
 
   .mj-split-block .mj-figure,
-  .mj-timeline-card:not(.mj-timeline-card-no-image) .mj-figure {
+  .mj-timeline-card .mj-figure {
     margin-bottom: 0;
   }
 
@@ -607,12 +617,24 @@ body.mj-body {
     gap: 80px;
   }
 
-  .mj-timeline-card:not(.mj-timeline-card-no-image) {
+  .mj-timeline-card {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 64px;
     align-items: center;
     padding: 36px;
+  }
+
+  .mj-timeline-card-reverse .mj-figure {
+    order: 2;
+  }
+
+  .mj-timeline-card-reverse .mj-timeline-copy {
+    order: 1;
+  }
+
+  .mj-timeline-subsection {
+    margin-top: 80px;
   }
 
   .mj-timeline-card .mj-figure {

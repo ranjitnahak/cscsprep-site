@@ -72,6 +72,7 @@ function scheduleModalIfComplete() {
   }, 400);
 }
 
+/** All .mj-figure img on the page (my-journey/ and coach/ paths) — initFigures() handles load/fallback. */
 function initFigures() {
   document.querySelectorAll('.mj-figure img').forEach((img) => {
     const figure = img.closest('.mj-figure');
