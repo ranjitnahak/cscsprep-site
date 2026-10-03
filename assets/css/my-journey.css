@@ -437,6 +437,113 @@ body.mj-body {
   opacity: 0.9;
 }
 
+/* ── Social links ── */
+
+.mj-section-social {
+  text-align: center;
+  padding-block: 96px;
+  border-top: 1px solid var(--dark3);
+}
+
+.mj-inner-social {
+  max-width: 720px;
+}
+
+.mj-social-tagline {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--light-grey);
+  margin: 0 0 32px;
+  font-weight: 400;
+}
+
+.mj-social-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.mj-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--dark2);
+  border: 2px solid var(--orange);
+  border-radius: 3px;
+  color: var(--white);
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.mj-social-btn:hover,
+.mj-social-btn:focus-visible {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.mj-social-btn:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.mj-social-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.mj-social-btn-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.mj-social-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.mj-social-sep {
+  color: var(--white);
+}
+
+.mj-social-handle {
+  font-weight: 400;
+  text-transform: none;
+  color: var(--grey);
+}
+
+.mj-social-btn:hover .mj-social-handle,
+.mj-social-btn:focus-visible .mj-social-handle {
+  color: var(--white);
+}
+
+@media (min-width: 768px) {
+  .mj-section-social {
+    padding-block: 96px;
+  }
+
+  .mj-social-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: nowrap;
+  }
+
+  .mj-social-btn {
+    width: 320px;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+}
+
 /* ── Footer ── */
 
 .mj-footer {
@@ -562,6 +669,10 @@ body.mj-body {
   .mj-section {
     padding: 48px 0;
     scroll-margin-top: 80px;
+  }
+
+  .mj-section.mj-section-social {
+    padding: 96px 0;
   }
 
   .mj-inner {
@@ -747,6 +858,10 @@ body.mj-body {
   .mj-reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .mj-social-btn {
     transition: none;
   }
 
