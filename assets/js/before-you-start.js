@@ -172,7 +172,7 @@ function renderModal() {
         <p class="by-result-sub">${sub}</p>
         <hr class="by-result-divider">
         <p class="by-share-heading">Want me to see this?</p>
-        <a class="by-share-btn" href="${escapeAttr(waUrl)}" target="_blank" rel="noopener noreferrer">SHARE MY RESULT WITH ME →</a>
+        <a class="by-share-btn" href="${escapeAttr(waUrl)}" target="_blank" rel="noopener noreferrer">SHARE MY RESULTS WITH RANJIT →</a>
         <p class="by-share-disclosure">This opens WhatsApp with your result already written in. Nothing is sent until you press send. I read these myself.</p>
         <button type="button" class="by-start-over" id="by-start-over">Start over</button>
       </header>
