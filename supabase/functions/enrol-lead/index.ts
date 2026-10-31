@@ -15,6 +15,8 @@ const RESPONSE_HEADERS = {
 
 const CAL_LINK = "https://cal.com/cscs-prep/cscs-clarity-call";
 const NOTIFY_EMAIL = "ranjit.nahak@sportsscienceuniversity.com";
+const ALLOWED_SOURCES = new Set(["enrol-form", "cohort_launch_email"]);
+const DEFAULT_SOURCE = "enrol-form";
 
 interface EnrolLeadBody {
   name?: string;
@@ -28,6 +30,11 @@ interface EnrolLeadBody {
   attempted_cscs?: boolean;
   biggest_challenge?: string;
   source?: string;
+}
+
+function resolveSource(raw: string | undefined): string {
+  const source = raw?.trim() ?? "";
+  return ALLOWED_SOURCES.has(source) ? source : DEFAULT_SOURCE;
 }
 
 function jsonResponse(body: unknown, status = 200): Response {
@@ -113,6 +120,7 @@ function buildNotificationHtml(
       | "certifications"
       | "attempted_cscs"
       | "biggest_challenge"
+      | "source"
     >
   >,
   createdAt: string,
@@ -133,6 +141,7 @@ function buildNotificationHtml(
 <strong>Certifications:</strong> ${escapeHtml(body.certifications)}<br>
 <strong>Attempted CSCS before:</strong> ${attemptedLabel}<br>
 <strong>Biggest challenge:</strong> ${escapeHtml(body.biggest_challenge)}<br>
+<strong>Source:</strong> ${escapeHtml(body.source)}<br>
 <strong>Submitted at:</strong> ${escapeHtml(submittedAt)}
 </p>
 `.trim();
@@ -185,6 +194,7 @@ Deno.serve(async (req) => {
     }
 
     const { name, first_name, last_name } = resolveName(body);
+    const source = resolveSource(body.source);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -197,7 +207,7 @@ Deno.serve(async (req) => {
         name,
         email: body.email!.trim(),
         phone: body.phone!.trim(),
-        source: "enrol-form",
+        source,
         metadata: {
           first_name,
           last_name,
@@ -226,6 +236,7 @@ Deno.serve(async (req) => {
       certifications: body.certifications!.trim(),
       attempted_cscs: body.attempted_cscs!,
       biggest_challenge: body.biggest_challenge!.trim(),
+      source,
     };
 
     const emailWarnings: string[] = [];

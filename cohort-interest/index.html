@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cohort Interest — CSCS PREP</title>
+  <meta name="description" content="A new CSCS Prep cohort is opening. Tell us you're interested and we'll set up a quick call to see if it's a fit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/cohort-interest.css">
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="cohort-interest-body">
+  <div id="nav-placeholder"></div>
+
+  <section class="cohort-interest-intro" aria-labelledby="cohort-interest-heading">
+    <div class="cohort-interest-intro-inner">
+      <span class="cohort-interest-eyebrow">Upcoming Cohort</span>
+      <h1 id="cohort-interest-heading" class="cohort-interest-heading">A New Cohort Is Opening</h1>
+      <p class="cohort-interest-subhead">Tell us you're interested and we'll set up a quick call to see if it's a fit.</p>
+    </div>
+  </section>
+
+  <main class="enrol-form-page" id="enrol-form-app">
+    <div class="enrol-form-progress" aria-hidden="true">
+      <div class="enrol-form-progress-fill" id="enrol-progress-fill"></div>
+    </div>
+    <div class="enrol-form-header">
+      <button type="button" class="enrol-form-back" id="enrol-back" hidden aria-label="Previous step">←</button>
+      <span class="enrol-form-step-count" id="enrol-step-count">1 of 8</span>
+    </div>
+    <div class="enrol-form-viewport">
+      <form class="enrol-form" id="enrol-form" novalidate>
+        <div class="enrol-form-step is-active" data-step="1">
+          <p class="enrol-form-label">What's your name?</p>
+          <div class="enrol-form-field-group">
+            <label class="enrol-form-field-label" for="enrol-first-name">First name</label>
+            <input class="enrol-form-input" type="text" id="enrol-first-name" name="first_name" placeholder="First name" autocomplete="given-name" autofocus>
+          </div>
+          <div class="enrol-form-field-group">
+            <label class="enrol-form-field-label" for="enrol-last-name">Last name</label>
+            <input class="enrol-form-input" type="text" id="enrol-last-name" name="last_name" placeholder="Last name" autocomplete="family-name">
+          </div>
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-1" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="2">
+          <label class="enrol-form-label" for="enrol-email">Your email address</label>
+          <input class="enrol-form-input" type="email" id="enrol-email" name="email" placeholder="you@example.com" autocomplete="email">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-2" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="3">
+          <label class="enrol-form-label" for="enrol-phone">Your phone number</label>
+          <input class="enrol-form-input" type="tel" id="enrol-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-3" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="4">
+          <label class="enrol-form-label" for="enrol-city">Which city are you based in?</label>
+          <select class="enrol-form-select" id="enrol-city" name="city">
+            <option value="" disabled selected>Select your city</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Faridabad">Faridabad</option>
+            <option value="Ghaziabad">Ghaziabad</option>
+            <option value="Gurugram">Gurugram</option>
+            <option value="Guwahati">Guwahati</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Indore">Indore</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jodhpur">Jodhpur</option>
+            <option value="Kanpur">Kanpur</option>
+            <option value="Kochi">Kochi</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Noida">Noida</option>
+            <option value="Patna">Patna</option>
+            <option value="Pune">Pune</option>
+            <option value="Raipur">Raipur</option>
+            <option value="Rajkot">Rajkot</option>
+            <option value="Ranchi">Ranchi</option>
+            <option value="Srinagar">Srinagar</option>
+            <option value="Surat">Surat</option>
+            <option value="Thane">Thane</option>
+            <option value="Vadodara">Vadodara</option>
+            <option value="Varanasi">Varanasi</option>
+            <option value="Visakhapatnam">Visakhapatnam</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="enrol-form-other-wrap" id="enrol-city-other-wrap" hidden>
+            <input class="enrol-form-input" type="text" id="enrol-city-other" placeholder="Enter your city">
+          </div>
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-4" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="5">
+          <label class="enrol-form-label" for="enrol-role">What is your current role?</label>
+          <select class="enrol-form-select" id="enrol-role" name="role">
+            <option value="" disabled selected>Select your role</option>
+            <option value="S&amp;C Coach">S&amp;C Coach</option>
+            <option value="Physiotherapist">Physiotherapist</option>
+            <option value="Student">Student</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="enrol-form-other-wrap" id="enrol-role-other-wrap" hidden>
+            <input class="enrol-form-input" type="text" id="enrol-role-other" placeholder="Enter your role">
+          </div>
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-5" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="6">
+          <label class="enrol-form-label" for="enrol-certifications">What certifications do you currently hold?</label>
+          <select class="enrol-form-select" id="enrol-certifications" name="certifications">
+            <option value="" disabled selected>Select your certification</option>
+            <option value="None">None</option>
+            <option value="ASCA L1">ASCA L1</option>
+            <option value="ASCA L2">ASCA L2</option>
+            <option value="UKSCA">UKSCA</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="enrol-form-other-wrap" id="enrol-cert-other-wrap" hidden>
+            <input class="enrol-form-input" type="text" id="enrol-cert-other" placeholder="Enter your certification">
+          </div>
+          <p class="enrol-form-hint">Press Enter ↵</p>
+          <p class="enrol-form-error" id="enrol-error-6" hidden></p>
+          <button type="button" class="enrol-form-ok">OK →</button>
+        </div>
+
+        <div class="enrol-form-step" data-step="7">
+          <label class="enrol-form-label">Have you attempted the CSCS exam before?</label>
+          <div class="enrol-form-cards enrol-form-cards--dual">
+            <button type="button" class="enrol-form-card" data-value="yes">Yes</button>
+            <button type="button" class="enrol-form-card" data-value="no">No</button>
+          </div>
+        </div>
+
+        <div class="enrol-form-step" data-step="8">
+          <label class="enrol-form-label">What is your biggest challenge in CSCS preparation?</label>
+          <div class="enrol-form-cards enrol-form-cards--stack">
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Don't know where to start">Don't know where to start</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Failing practice questions">Failing practice questions</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Difficulty understanding scientific concepts">Difficulty understanding scientific concepts</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Trouble with the Practical section">Trouble with the Practical section</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Lack of motivation &amp; consistency">Lack of motivation &amp; consistency</button>
+            <button type="button" class="enrol-form-card enrol-form-card--wide" data-value="Not preparing for CSCS">Not preparing for CSCS</button>
+          </div>
+          <button type="button" class="enrol-form-submit" id="enrol-submit" hidden>Submit →</button>
+          <p class="enrol-form-submit-error" id="enrol-submit-error" hidden></p>
+        </div>
+      </form>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/cohort-interest-form.js"></script>
+</body>
+</html>

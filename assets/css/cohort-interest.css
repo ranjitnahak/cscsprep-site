@@ -1,0 +1,67 @@
+/* Cohort interest landing — intro band above enrol form */
+
+.cohort-interest-body {
+  background: var(--dark);
+}
+
+.cohort-interest-body #footer-placeholder {
+  display: none;
+}
+
+.cohort-interest-intro {
+  background: var(--dark2);
+  border-bottom: 1px solid var(--dark3);
+  padding: 48px 24px 40px;
+  text-align: center;
+}
+
+.cohort-interest-intro-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cohort-interest-eyebrow {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.cohort-interest-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0 0 16px;
+}
+
+.cohort-interest-subhead {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--grey);
+  margin: 0;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.cohort-interest-body .enrol-form-page {
+  min-height: calc(100vh - 69px - 180px);
+}
+
+@media (max-width: 600px) {
+  .cohort-interest-intro {
+    padding: 36px 20px 32px;
+  }
+
+  .cohort-interest-subhead {
+    font-size: 15px;
+  }
+}
