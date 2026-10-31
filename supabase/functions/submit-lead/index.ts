@@ -51,7 +51,17 @@ Deno.serve(async (req: Request) => {
       razorpay_payment_id?: string | null;
     };
 
-    if (!first_name || !last_name || !email || !whatsapp) {
+    const resolvedPaymentMethod = payment_method ?? "razorpay";
+    const isOpenEntry = resolvedPaymentMethod === "open";
+    const firstName = first_name?.trim() ?? "";
+    const lastName = last_name?.trim() || null;
+    const emailValue = email?.trim() ?? "";
+    const whatsappValue = whatsapp?.trim() || null;
+
+    if (
+      !firstName || !emailValue ||
+      (!isOpenEntry && (!lastName || !whatsappValue))
+    ) {
       return new Response(
         JSON.stringify({ success: false, message: "Missing required fields" }),
         {
@@ -64,7 +74,6 @@ Deno.serve(async (req: Request) => {
     const resolvedScore = score ?? 0;
     const resolvedTier = tier ?? "Unknown";
     const resolvedDomainScores = domain_scores ?? {};
-    const resolvedPaymentMethod = payment_method ?? "razorpay";
     const resolvedCoupon = coupon_used ?? null;
     const resolvedPaymentId = razorpay_payment_id ?? null;
 
@@ -77,10 +86,10 @@ Deno.serve(async (req: Request) => {
     const { data, error } = await supabase
       .from("blood_test_leads")
       .insert({
-        first_name,
-        last_name,
-        email,
-        whatsapp,
+        first_name: firstName,
+        last_name: lastName,
+        email: emailValue,
+        whatsapp: whatsappValue,
         score: resolvedScore,
         total: 20,
         tier: resolvedTier,
@@ -105,13 +114,13 @@ Deno.serve(async (req: Request) => {
     console.log("Lead inserted:", JSON.stringify(data));
 
     const { error: leadsError } = await supabase.from("leads").insert({
-      name: `${first_name} ${last_name}`.trim(),
-      email,
-      phone: whatsapp,
-      source: "blood-test",
+      name: [firstName, lastName].filter(Boolean).join(" "),
+      email: emailValue,
+      phone: whatsappValue,
+      source: isOpenEntry ? "blood-test-start" : "blood-test",
       metadata: {
-        first_name,
-        last_name,
+        first_name: firstName,
+        last_name: lastName,
         score: resolvedScore,
         total: 20,
         tier: resolvedTier,
