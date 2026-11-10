@@ -170,20 +170,52 @@ html.blood-test-open .payment-paid { display: none; }
 .gap-block-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
 .gap-block-body { font-size: 14px; color: var(--grey); line-height: 1.8; }
 .gap-divider { border-top: 1px solid #222; padding-top: 16px; }
-.cta-section { border: 1px solid #2a2a2a; border-radius: 4px; padding: 44px 36px; text-align: center; background: linear-gradient(135deg, rgba(244,81,30,.04), rgba(255,179,71,.03)); }
-.cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(28px, 4.5vw, 44px); text-transform: uppercase; margin-bottom: 16px; line-height: 1.1; }
-.cta-body { font-size: 15px; color: var(--grey); line-height: 1.85; max-width: 480px; margin: 0 auto 40px; }
-.cta-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 520px; margin: 0 auto 24px; }
-.btn-cta { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; border: none; padding: 18px 24px; border-radius: 3px; cursor: pointer; transition: all .2s; text-decoration: none; display: block; line-height: 1.3; }
-.btn-cta-primary { background: var(--orange); color: var(--white); }
-.btn-cta-primary:hover { opacity: .85; transform: translateY(-1px); }
-.btn-cta-whatsapp { background: #25D366; color: var(--white); }
-.btn-cta-whatsapp:hover { opacity: .85; transform: translateY(-1px); }
-.cta-small { font-size: 12px; color: #333; margin-top: 8px; }
+.cta-section { border: 1px solid #2a2a2a; border-radius: 4px; padding: 48px 36px 44px; text-align: center; background: linear-gradient(135deg, rgba(244,81,30,.04), rgba(255,179,71,.03)); }
+.cta-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 11vw, 68px); text-transform: uppercase; margin-bottom: 16px; line-height: 0.95; max-width: 100%; }
+.cta-body { font-size: 15px; color: var(--grey); line-height: 1.7; max-width: 480px; margin: 0 auto 8px; }
+.cta-arrow { display: flex; justify-content: center; margin: 12px 0 20px; color: var(--orange); }
+.cta-arrow svg { width: 32px; height: 32px; animation: cta-bounce 1.6s ease-in-out infinite; }
+@keyframes cta-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.btn-cta-whatsapp {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(15px, 4.2vw, 18px);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  background: #25D366;
+  color: var(--white);
+  border: none;
+  min-height: 56px;
+  padding: 18px 28px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: 1.15;
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.35);
+  transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.btn-cta-whatsapp svg { width: 22px; height: 22px; flex-shrink: 0; }
+.btn-cta-whatsapp:hover { opacity: .92; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(37, 211, 102, 0.5); }
+.btn-cta-whatsapp:active { opacity: 1; transform: translateY(1px); box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3); }
 .takeaway { background: var(--orange); border-radius: 3px; padding: 18px 24px; margin-bottom: 48px; font-size: 15px; line-height: 1.7; color: var(--white); }
 @media (max-width: 600px) {
-  .cta-buttons { grid-template-columns: 1fr; }
+  .cta-section { padding: 36px 20px 32px; }
+  .btn-cta-whatsapp { letter-spacing: 0.8px; padding: 16px 18px; }
   .quiz-image-row { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-arrow svg { animation: none; }
 }
 </style>
 </head>
@@ -313,14 +345,21 @@ html.blood-test-open .payment-paid { display: none; }
 
       <!-- CTA -->
       <div class="cta-section">
-        <div class="topic-label">Next Step</div>
-        <div class="cta-title">Let's Talk About<br>Your <span class="highlight">Prep.</span></div>
-        <p class="cta-body">Book a free 20-minute clarity call. We'll look at your results together, talk through your prep timeline, and you'll leave knowing exactly what to do next — whether that's the prep course or not.</p>
-        <div class="cta-buttons">
-          <a class="btn-cta btn-cta-primary" href="https://cal.com/cscs-prep/cscs-clarity-call" target="_blank" rel="noopener">📅 Book a Free<br>Clarity Call</a>
-          <a class="btn-cta btn-cta-whatsapp" href="https://wa.me/919686476851?text=Hi%20Ranjit%2C%20I%20just%20completed%20the%20CSCS%20Blood%20Test%20and%20would%20love%20to%20discuss%20my%20results." target="_blank" rel="noopener">💬 Message on<br>WhatsApp</a>
+        <div class="topic-label">Last Step</div>
+        <div class="cta-title">Send Me Your<br><span class="highlight">Score.</span></div>
+        <p class="cta-body">Tap the button below. Your score is already filled in. Just hit send and I'll personally review your results.</p>
+        <div class="cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v14"/>
+            <path d="M6 13l6 6 6-6"/>
+          </svg>
         </div>
-        <p class="cta-small">No hard sell. No pressure. Just an honest conversation.</p>
+        <a class="btn-cta-whatsapp" id="whatsappCta" href="https://wa.me/918595922143?text=Hey%20Ranjit%2C%20I%20took%20the%20CSCS%20blood%20test%20and%20I'd%20like%20to%20discuss%20my%20results%20with%20you." target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65a11.9 11.9 0 0 0 5.76 1.47h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.16-3.45-8.44zM12.07 21.3h-.01a9.86 9.86 0 0 1-5.02-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.45-4.44 9.89-9.9 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+          </svg>
+          Message Ranjit on WhatsApp
+        </a>
       </div>
     </div>
   </div>
@@ -785,6 +824,18 @@ function buildResults() {
   document.getElementById('tierHeadline').textContent = tier.headline;
   document.getElementById('tierBody').textContent = tier.body;
 
+  const waBtn = document.getElementById('whatsappCta');
+  if (waBtn) {
+    const hasScore = Number.isFinite(score) && tier && tier.label;
+    const scoreLabel = hasScore ? `${score}/20 (${tier.label})` : '';
+    const message = hasScore
+      ? `Hey Ranjit, I took the CSCS blood test and I got this score: ${scoreLabel}. Looking forward to discussing the results with you.`
+      : "Hey Ranjit, I took the CSCS blood test and I'd like to discuss my results with you.";
+    waBtn.href = `https://wa.me/918595922143?text=${encodeURIComponent(message)}`;
+    if (scoreLabel) waBtn.dataset.score = scoreLabel;
+    else delete waBtn.dataset.score;
+  }
+
   const domains = Object.keys(domainColors);
   const domainScores = domains.map(d => {
     const qs = questions.filter(q => q.domain===d);
@@ -829,9 +880,20 @@ function buildResults() {
     gapEl.innerHTML = `<div class="takeaway"><strong>No critical gaps identified.</strong> Your fundamentals are solid across all domains. The next step is sharpening exam strategy and precision — exactly what the prep course final review module covers.</div>`;
   }
 }
+
+document.getElementById('whatsappCta')?.addEventListener('click', function () {
+  if (typeof window.va !== 'function') return;
+  const score = this.dataset.score;
+  const data = {};
+  if (score) data.score = score;
+  window.va('event', { name: 'blood_test_whatsapp_click', data });
+});
 </script>
 <script src="/assets/js/include-partials.js"></script>
 <script src="/assets/js/coach-carousel.js"></script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
