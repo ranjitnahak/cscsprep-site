@@ -36,7 +36,7 @@ function buildWhatsAppUrl() {
   const text =
     `Hi Ranjit! I just went through your journey. Yes, I'm ready to crack the CSCS. 💪\n` +
     `(My answers: ${count}/5 yes)`;
-  const number = CSCS_CONFIG.ranjitWhatsAppNumber || '919686476851';
+  const number = CSCS_CONFIG.ranjitWhatsAppNumber || '918595922143';
   return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }
 

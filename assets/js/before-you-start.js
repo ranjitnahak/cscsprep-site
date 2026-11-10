@@ -123,7 +123,7 @@ function buildWhatsAppUrl() {
   const number =
     typeof CSCS_CONFIG !== 'undefined' && CSCS_CONFIG.ranjitWhatsAppNumber
       ? CSCS_CONFIG.ranjitWhatsAppNumber
-      : '919686476851';
+      : '918595922143';
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
