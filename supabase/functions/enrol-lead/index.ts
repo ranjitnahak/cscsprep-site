@@ -13,7 +13,7 @@ const RESPONSE_HEADERS = {
   ...CORS_HEADERS,
 };
 
-const CAL_LINK = "https://cal.com/cscs-prep/cscs-clarity-call";
+const CAL_LINK = "https://cal.id/ranjit-nahak/cscs-clarity-call";
 const NOTIFY_EMAIL = "ranjit.nahak@sportsscienceuniversity.com";
 const ALLOWED_SOURCES = new Set(["enrol-form", "cohort_launch_email"]);
 const DEFAULT_SOURCE = "enrol-form";
