@@ -9,3 +9,6 @@ verify_jwt = false
 
 [functions.submit-lead]
 verify_jwt = false
+
+[functions.rebook-call]
+verify_jwt = false

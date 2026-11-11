@@ -10,6 +10,7 @@ const CSCS_CONFIG = {
   instagramUrl: 'https://www.instagram.com/cscsprep/',
   calLink: 'https://cal.id/ranjit-nahak/cscs-clarity-call',
   enrolLeadEndpoint: 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/enrol-lead',
+  rebookEndpoint: 'https://ehvuneluhyxpoiucyigw.supabase.co/functions/v1/rebook-call',
 
   // Links
   privacyUrl: 'https://www.cscsprep.in/privacy',

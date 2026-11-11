@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebook a Clarity Call — CSCS Prep</title>
+  <meta name="description" content="Pay ₹499 to rebook a CSCS clarity call. After payment, you get the link to book a time with Ranjit.">
+  <link rel="canonical" href="https://cscsprep.in/rebook">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cscsprep.in/rebook">
+  <meta property="og:title" content="Rebook a Clarity Call — CSCS Prep">
+  <meta property="og:description" content="Pay ₹499 and get the link to book your CSCS clarity call.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/rebook.css">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="rebook-body">
+  <header class="rebook-header">
+    <a class="rebook-logo" href="/">CSCS <span>PREP</span></a>
+  </header>
+
+  <main class="rebook-main">
+    <section class="rebook-card" id="rebook-pay" aria-labelledby="rebook-heading">
+      <p class="rebook-eyebrow">Clarity call</p>
+      <h1 id="rebook-heading">Rebook your clarity call</h1>
+      <p class="rebook-lead">Pay ₹499 and you'll get the link to book a time with Ranjit. We'll email the same link to you.</p>
+
+      <form class="rebook-form" id="rebook-form" novalidate>
+        <label class="rebook-field">
+          <span>Name</span>
+          <input type="text" id="rebook-name" name="name" autocomplete="name" placeholder="Your name">
+        </label>
+        <label class="rebook-field">
+          <span>Email</span>
+          <input type="email" id="rebook-email" name="email" autocomplete="email" placeholder="you@example.com">
+        </label>
+        <label class="rebook-field">
+          <span>Phone</span>
+          <input type="tel" id="rebook-phone" name="phone" autocomplete="tel" placeholder="+91 98765 43210">
+        </label>
+
+        <div class="rebook-price">
+          <p class="rebook-price-amount">₹499</p>
+          <p class="rebook-price-note">One-time payment<br>Booking link after payment</p>
+        </div>
+
+        <p class="rebook-error" id="rebook-error" hidden></p>
+        <button class="rebook-pay-btn" id="rebook-submit" type="submit">Pay ₹499</button>
+      </form>
+    </section>
+
+    <section class="rebook-card rebook-success" id="rebook-success" hidden aria-labelledby="rebook-success-heading">
+      <p class="rebook-eyebrow">Payment received</p>
+      <h1 id="rebook-success-heading">You're in. Book your call.</h1>
+      <p class="rebook-lead">Use the link below to pick a time. We've also emailed it to you.</p>
+      <a class="rebook-pay-btn rebook-book-link" id="rebook-cal-link" href="#" target="_blank" rel="noopener noreferrer">Book your call</a>
+      <p class="rebook-email-note" id="rebook-email-note" hidden></p>
+    </section>
+  </main>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/rebook.js"></script>
+</body>
+</html>
